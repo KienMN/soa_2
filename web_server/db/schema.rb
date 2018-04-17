@@ -10,25 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321015210) do
+ActiveRecord::Schema.define(version: 20180417084043) do
 
-  create_table "book_borrows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "book_id"
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "content", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_book_borrows_on_book_id"
-    t.index ["user_id"], name: "index_book_borrows_on_user_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "author"
-    t.string "country"
-    t.string "language"
-    t.string "pages"
-    t.string "title", null: false
-    t.datetime "publish_date"
-    t.integer "quantity_in_stock", default: 0
+  create_table "evalution_forms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.json "target_assignment"
+    t.integer "self_assessment"
+    t.integer "class_president_assessment"
+    t.bigint "student_id"
+    t.bigint "class_president_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["class_president_id"], name: "index_evalution_forms_on_class_president_id"
+    t.index ["student_id"], name: "index_evalution_forms_on_student_id"
+  end
+
+  create_table "organization_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_organization_users_on_organization_id"
+    t.index ["user_id"], name: "index_organization_users_on_user_id"
+  end
+
+  create_table "organizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name", null: false
+    t.string "label"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,10 +52,14 @@ ActiveRecord::Schema.define(version: 20180321015210) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "type"
     t.string "username"
+    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "book_borrows", "books"
-  add_foreign_key "book_borrows", "users"
+  add_foreign_key "comments", "users"
+  add_foreign_key "evalution_forms", "users", column: "class_president_id"
+  add_foreign_key "evalution_forms", "users", column: "student_id"
+  add_foreign_key "organization_users", "organizations"
+  add_foreign_key "organization_users", "users"
 end

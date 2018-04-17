@@ -1,0 +1,2 @@
+class ClassPresident < User
+end
