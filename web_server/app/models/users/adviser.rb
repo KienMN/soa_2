@@ -1,0 +1,2 @@
+class Adviser < User
+end

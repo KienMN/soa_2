@@ -1,0 +1,2 @@
+class EvalutionForm < ApplicationRecord
+end
