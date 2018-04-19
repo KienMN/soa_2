@@ -1,10 +1,16 @@
-class Api::V1::Student::BookBorrowsController < ApplicationController
+class Api::V1::Employee::SemestersController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action -> {pre_processing}
 
-  include Student::BookBorrow::BookBorrowHelper
-
   def create
+    render json: @action.status
+  end
+
+  def destroy
+    render json: @action.status
+  end
+
+  def show
     render json: @action.status
   end
 
@@ -12,7 +18,7 @@ class Api::V1::Student::BookBorrowsController < ApplicationController
     render json: @action.status
   end
 
-  def destroy
+  def update
     render json: @action.status
   end
 end

@@ -1,13 +1,11 @@
-module Student::Book::BookHelper
+module SessionHelper
   def pre_processing
     case action_name
-    when 'show'
+    when 'create'
       @action = Show.new(params: params)
-    when 'index'
+    when 'destroy'
       @action = Index.new(params: params)
     end
-
-    implementation
   end
 
   def implementation
@@ -18,23 +16,17 @@ module Student::Book::BookHelper
     attr_reader :status
 
     def initialize(options)
-      @params = options[:params]
+      @options = options
     end
   end
 
-  class Index < Base
-    include Student::Book::IndexHelper
-
+  class Create < Base
     def initialize(options)
       super(options)
     end
   end
 
-  class Show < Base
-    include Student::Book::ShowHelper
-
-    def initialize(options)
-      super(options)
-    end
+  def init_data
+    session[:user] = @user
   end
 end

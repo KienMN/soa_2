@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180417084043) do
+ActiveRecord::Schema.define(version: 20180418082253) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "content", null: false
@@ -20,16 +20,17 @@ ActiveRecord::Schema.define(version: 20180417084043) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "evalution_forms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "evaluation_forms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.json "target_assignment"
+    t.integer "status", default: 0
     t.integer "self_assessment"
     t.integer "class_president_assessment"
     t.bigint "student_id"
     t.bigint "class_president_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["class_president_id"], name: "index_evalution_forms_on_class_president_id"
-    t.index ["student_id"], name: "index_evalution_forms_on_student_id"
+    t.index ["class_president_id"], name: "index_evaluation_forms_on_class_president_id"
+    t.index ["student_id"], name: "index_evaluation_forms_on_student_id"
   end
 
   create_table "organization_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -49,6 +50,13 @@ ActiveRecord::Schema.define(version: 20180417084043) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "semesters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "title"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "type"
     t.string "username"
@@ -58,8 +66,8 @@ ActiveRecord::Schema.define(version: 20180417084043) do
   end
 
   add_foreign_key "comments", "users"
-  add_foreign_key "evalution_forms", "users", column: "class_president_id"
-  add_foreign_key "evalution_forms", "users", column: "student_id"
+  add_foreign_key "evaluation_forms", "users", column: "class_president_id"
+  add_foreign_key "evaluation_forms", "users", column: "student_id"
   add_foreign_key "organization_users", "organizations"
   add_foreign_key "organization_users", "users"
 end

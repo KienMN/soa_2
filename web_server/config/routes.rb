@@ -4,13 +4,28 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
+      post "sign_in", :to => "sessions#create"
+      delete "sign_out", :to => "sessions#destroy"
+
       namespace :student do
-        resources :book_borrows, only: [:create, :index, :destroy]
-        resources :books, only: [:index, :show]
+        resources :comments, only: [:create, :destroy]
+        resources :evaluation_forms, only: [:show, :update]
       end
 
-      namespace :librarian do
-        resources :book_managements, only: [:create, :index, :show, :update, :destroy]
+      namespace :class_president do
+        resources :comments, only: [:create, :destroy]
+        resources :evaluation_forms, only: [:index, :show, :update]
+      end
+
+      namespace :adviser do
+        resources :comments, only: [:create, :destroy]
+        resources :evaluation_forms, only: [:index, :show]
+      end
+
+      namespace :employee do
+        resources :comments, only: [:create, :destroy]
+        resources :evaluation_forms, only: [:index, :show]
+        resources :semesters, only: [:create, :update, :show, :index, :destroy]
       end
     end
   end
