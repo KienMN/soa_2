@@ -1,8 +1,8 @@
 class CreateOrganizations < ActiveRecord::Migration[5.1]
   def change
     create_table :organizations do |t|
-      t.string :name, null: false
-      t.integer :type
+      t.string :title, null: false
+      t.integer :type_organization
       t.string :description
 
       # t.integer  :parent_id, null: true, index: true
