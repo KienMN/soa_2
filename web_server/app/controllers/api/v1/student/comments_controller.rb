@@ -1,14 +1,14 @@
-class Api::V1::Student::BooksController < ApplicationController
+class Api::V1::Student::CommentsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action -> {pre_processing}
 
-  include Student::Book::BookHelper
+  include Stduent::Comment::CommentHelper
 
-  def index
+  def create
     render json: @action.status
   end
 
-  def show
+  def destroy
     render json: @action.status
   end
 end
