@@ -2,10 +2,12 @@ module Adviser::Comment::CommentHelper
   def pre_processing
     validate_role
 
-    switch_case
+    generate_action
 
     implementation
   end
+
+  private
 
   def validate_role
     if @current_user.type == "Adviser"
@@ -13,7 +15,7 @@ module Adviser::Comment::CommentHelper
     end
   end
 
-  def switch_case
+  def generate_action
     case action_name
     when 'create'
       @action = Create.new(
