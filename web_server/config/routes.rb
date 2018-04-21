@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       post "sign_in", :to => "sessions#create"
-      delete "sign_out", :to => "sessions#destroy"
 
       namespace :student do
         resources :comments, only: [:create, :destroy]
