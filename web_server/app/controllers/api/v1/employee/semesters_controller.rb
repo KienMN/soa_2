@@ -1,6 +1,8 @@
 class Api::V1::Employee::SemestersController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action -> {pre_processing}
+  before_action -> { pre_processing }
+
+  include Employee::Semester::SemesterHelper
 
   def create
     render json: @action.status
