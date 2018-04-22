@@ -6,10 +6,15 @@ module Adviser::Comment::CreateHelper
   end
 
   def create_comment
-    @evaluation_form = EvaluationForm.eager_load(student: [:organization])
-      .find_by(id: @params[:evaluation_id], status: EvaluationForm.statuses[:avaiable])
+    @evaluation_form = ::EvaluationForm.eager_load(student: [:organization])
+      .find_by(id: @params[:evaluation_id], status: ::EvaluationForm.statuses[:avaiable])
 
-    if @evaluation_form.student.organization.id == @current_user.id
+    organization_user = ::OrganizationUser.find_by(
+      id: @evaluation_form.student.organization.id,
+      user_id: @current_user.id
+    )
+
+    if organization_user.present?
       @new_comment = ::Comment.create(comment_params)
     end
   end

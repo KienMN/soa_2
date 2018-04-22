@@ -24,17 +24,17 @@ class EvaluationForm < ApplicationRecord
       desc: "Giỏi"
     },
     middling: {
-      upper_limit: 100,
-      lower_limit: 90,
+      upper_limit: 80,
+      lower_limit: 60,
       desc: "Khá"
     },
     medium: {
-      upper_limit: 100,
-      lower_limit: 90,
+      upper_limit: 60,
+      lower_limit: 40,
       desc: "Trung bình"
     },
     weak: {
-      upper_limit: 100,
+      upper_limit: 40,
       lower_limit: 0,
       desc: "Yếu"
     },
@@ -171,74 +171,48 @@ class EvaluationForm < ApplicationRecord
         study_result: {
           score: 0,
           sub_fields: {
-            poor_result: {
-              score: 0
-            },
-            warning: {
-              score: 0
-            },
-            not_enough_credits: {
-              score: 0
-            },
-            exam_skip: {
-              score: 0
-            }
+            poor_result:        {score: 0},
+            warning:            {score: 0},
+            not_enough_credits: {score: 0},
+            exam_skip:          {score: 0}
           }
         },
         regulations: {
           score: 0,
           sub_fields: {
-            wrong_payment: {
-              score: 0
-            },
-            late_course_registration: {
-              score: 0
-            },
-            absence: {
-              score: 0
-            },
-            late_return: {
-              score: 0
-            },
-            local_regulations: {
-              score: 0
-            }
+            wrong_payment:            {score: 0},
+            late_course_registration: {score: 0},
+            absence:                  {score: 0},
+            late_return:              {score: 0},
+            local_regulations:        {score: 0}
           }
         },
         activities: {
           score: 0,
           sub_fields: {
-            full_participation: {
-              score: 0
-            },
-            addition_activities: {
-              score: 0
-            },
-            activities_absence: {
-              score: 0
-            }
+            full_participation:  {score: 0},
+            addition_activities: {score: 0},
+            activities_absence:  {score: 0}
           }
         },
         public_relationship: {
           score: 0,
           sub_fields: {
-            disunity: {
-              score: 0
-            }
+            disunity: {score: 0}
           }
         },
         special_achivement: {
           score: 0,
           sub_fields: {
-            important_position: {
-              score: 0
-            },
-            high_competion_result: {
-              score: 0
-            },
+            important_position:    {score: 0},
+            high_competion_result: {score: 0},
           }
         }
       }
+    end
+
+    def create_evaluation_form(data)
+      return self.create(generate_form.merge(data))
     end
   end
 end

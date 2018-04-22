@@ -6,7 +6,7 @@ module Student::Comment::CreateHelper
   end
 
   def create_comment
-    @evaluation_form = EvaluationForm.eager_load(:student)
+    @evaluation_form = ::EvaluationForm.eager_load(:student)
       .find_by(id: @params[:evaluation_id])
 
     if @evaluation_form.user_id == @current_user.id
