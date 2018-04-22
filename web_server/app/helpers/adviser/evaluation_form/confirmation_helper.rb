@@ -9,17 +9,8 @@ module Adviser::EvaluationForm::ComfirmationHelper
 
   def update_evaluation_form
     @evaluation_form   = ::EvaluationForm.find_by(id: @params[:id])
-    confirmation_value = ::EvaluationForm::COMFIRMATION[:adviser]
 
-    if @evaluation_form.confirmation % confirmation_value == 0
-      @evaluation_form.update_attributes(
-        confirmation: @evaluation_form / confirmation_value
-      )
-    else
-      @evaluation_form.update_attributes(
-        confirmation: @evaluation_form * confirmation_value
-      )
-    end
+    @evaluation_form.update_confirmation(:adviser)
   end
 
   def generate_status

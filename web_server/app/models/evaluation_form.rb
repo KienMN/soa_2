@@ -165,6 +165,20 @@ class EvaluationForm < ApplicationRecord
     }
   }
 
+  def update_confirmation(type)
+    confirmation_value = ::EvaluationForm::COMFIRMATION[type]
+
+    if self.confirmation % confirmation_value == 0
+      self.update_attributes(
+        confirmation: self.confirmation / confirmation_value
+      )
+    else
+      self.update_attributes(
+        confirmation: self.confirmation * confirmation_value
+      )
+    end
+  end
+
   class << self
     def generate_form
       return {
