@@ -10,7 +10,7 @@ class CreateEvaluationForms < ActiveRecord::Migration[5.1]
       t.integer :classification, default: 0
       t.references :semester, foreign_key: true, index: true
       t.references :student, foreign_key: {to_table: :users}, index: true
-      t.references :class_president, foreign_key: {to_table: :users}, index: true
+      # t.references :class_president, foreign_key: {to_table: :users}, index: true
       t.timestamps
     end
   end

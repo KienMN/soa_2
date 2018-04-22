@@ -6,9 +6,15 @@ module ClassPresident::Comment::CreateHelper
   end
 
   def create_comment
-    @evaluation = EvaluationForm.eager_load(:student).find_by(id: @params[:evaluation_id])
+    @evaluation_form = ::EvaluationForm.eager_load(student: [:organization])
+      .find_by(id: @params[:evaluation_id], status: ::EvaluationForm.statuses[:avaiable])
 
-    if @evaluation.user_id == @current_user.id
+    organization_user = ::OrganizationUser.find_by(
+      id: @evaluation_form.student.organization.id,
+      user_id: @current_user.id
+    )
+
+    if organization_user.present?
       @new_comment = ::Comment.create(comment_params)
     end
   end

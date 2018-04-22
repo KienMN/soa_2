@@ -8,23 +8,29 @@ Rails.application.routes.draw do
 
       namespace :student do
         resources :comments, only: [:create, :destroy]
-        resources :evaluation_forms, only: [:show, :update]
+        resources :evaluation_forms, only: [:index, :show, :update]
       end
 
       namespace :class_president do
         resources :comments, only: [:create, :destroy]
-        resources :evaluation_forms, only: [:index, :show, :update]
+        resources :evaluation_forms, only: [:index, :show, :update] do
+          get :confirmation, on: :collection
+        end
       end
 
       namespace :adviser do
         resources :comments, only: [:create, :destroy]
-        resources :evaluation_forms, only: [:index, :show]
+        resources :evaluation_forms, only: [:index, :show, :update] do
+          get :confirmation, on: :collection
+        end
       end
 
       namespace :employee do
         resources :comments, only: [:create, :destroy]
         resources :evaluation_forms, only: [:index, :show]
-        resources :semesters, only: [:create, :update, :show, :index, :destroy]
+        resources :semesters, only: [:create, :update, :show, :index, :destroy] do
+          get :confirmation, on: :collection
+        end
       end
     end
   end
