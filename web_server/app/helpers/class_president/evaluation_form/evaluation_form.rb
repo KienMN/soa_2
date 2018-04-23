@@ -3,6 +3,8 @@ module ClassPresident::EvaluationForm::EvaluationFormHelper
     validate_role
 
     generate_action
+
+    implementation
   end
 
   private
