@@ -15,7 +15,7 @@ module ClassPresident::EvaluationForm::ShowHelper
 
     @evaluation_form = ::EvaluationForm.joins(student: [:organization_users])
       .where("organization_users.organization_id in (?)", @organization_users)
-      .where((id: @params[:id])).limit(1)
+      .where(id: @params[:id]).limit(1)
   end
 
   def generate_status

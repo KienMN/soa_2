@@ -1,4 +1,4 @@
-module Adviser::EvaluationForm::ComfirmationHelper
+module Adviser::EvaluationForm::ConfirmationHelper
   def process
     update_evaluation_form
 
@@ -8,7 +8,7 @@ module Adviser::EvaluationForm::ComfirmationHelper
   private
 
   def update_evaluation_form
-    @evaluation_form   = ::EvaluationForm.find_by(id: @params[:id])
+    @evaluation_form = ::EvaluationForm.find_by(id: @params[:id])
 
     @evaluation_form.update_confirmation(:adviser)
   end
