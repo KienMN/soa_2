@@ -1,4 +1,4 @@
-module ClassPresident::EvaluationForm::ComfirmationHelper
+module ClassPresident::EvaluationForm::ConfirmationHelper
   def process
     update_evaluation_form
 
