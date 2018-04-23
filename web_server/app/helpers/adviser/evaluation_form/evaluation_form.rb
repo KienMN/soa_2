@@ -62,7 +62,7 @@ module Adviser::EvaluationForm::EvaluationFormHelper
   end
 
   class Confirmation < Base
-    include Adviser::EvaluationForm::ConfirmationHelper
+    include Adviser::EvaluationForm::ComfirmationHelper
 
     def initialize(options)
       super(options)
