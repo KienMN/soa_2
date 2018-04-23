@@ -44,18 +44,24 @@ module Student::EvaluationForm::EvaluationFormHelper
   end
 
   class Index < Base
+    include Student::EvaluationForm::IndexHelper
+
     def initialize(options)
       super(options)
     end
   end
 
   class Show < Base
+    include Student::EvaluationForm::ShowHelper
+
     def initialize(options)
       super(options)
     end
   end
 
   class Update < Base
+    include Student::EvaluationForm::UpdateHelper
+
     def initialize(options)
       super(options)
     end

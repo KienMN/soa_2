@@ -28,7 +28,7 @@ module ClassPresident::EvaluationForm::EvaluationFormHelper
         params: params, current_user: @current_user
       })
     when 'confirmation'
-      @action = Update.new({
+      @action = Confirmation.new({
         params: params, current_user: @current_user
       })
     end
@@ -48,24 +48,32 @@ module ClassPresident::EvaluationForm::EvaluationFormHelper
   end
 
   class Index < Base
+    include ClassPresident::EvaluationForm::IndexHelper
+
     def initialize(options)
       super(options)
     end
   end
 
   class Show < Base
+    include ClassPresident::EvaluationForm::ShowHelper
+
     def initialize(options)
       super(options)
     end
   end
 
   class Update < Base
+    include ClassPresident::EvaluationForm::UpdateHelper
+
     def initialize(options)
       super(options)
     end
   end
 
   class Confirmation < Base
+    include ClassPresident::EvaluationForm::ConfirmationHelper
+
     def initialize(options)
       super(options)
     end

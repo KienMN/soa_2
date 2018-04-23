@@ -48,24 +48,32 @@ module Employee::EvaluationForm::EvaluationFormHelper
   end
 
   class Create < Base
+    include Employee::EvaluationForm::CreateHelper
+
     def initialize(options)
       super(options)
     end
   end
 
   class Index < Base
+    include Employee::EvaluationForm::IndexHelper
+
     def initialize(options)
       super(options)
     end
   end
 
   class Show < Base
+    include Employee::EvaluationForm::ShowHelper
+
     def initialize(options)
       super(options)
     end
   end
 
   class Destroy < Base
+    include Employee::EvaluationForm::DestroyHelper
+
     def initialize(options)
       super(options)
     end
