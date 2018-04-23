@@ -18,7 +18,7 @@ module ClassPresident::EvaluationForm::UpdateHelper
 
     @evaluation_form = ::EvaluationForm.joins(student: [:organization_users])
       .where("organization_users.organization_id in (?)", @organization_users)
-      .where((id: @params[:id])).limit(1)
+      .where(id: @params[:id]).limit(1)
       .update_attributes(evaluation_form_params)
   end
 
