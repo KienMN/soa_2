@@ -15,10 +15,6 @@ module Session::SessionHelper
       @action = Create.new({
         params: params, user: @user
       })
-    when 'destroy'
-      @action = Destroy.new({
-        params: params
-      })
     end
   end
 
@@ -36,14 +32,18 @@ module Session::SessionHelper
   end
 
   class Create < Base
+    include Session::CreateHelper
+
     def initialize(options)
       super(options)
     end
   end
 
-  class Destroy < Base
-    def initialize(options)
-      super(options)
-    end
-  end
+  # class Destroy < Base
+  #   include Session::DestroyHelper
+
+  #   def initialize(options)
+  #     super(options)
+  #   end
+  # end
 end
