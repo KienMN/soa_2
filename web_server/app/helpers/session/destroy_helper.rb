@@ -1,3 +1,0 @@
-module Session::DestroyHelper
-
-end
