@@ -1,4 +1,4 @@
-module Employee::EvaluationForm::ComfirmationHelper
+module Employee::EvaluationForm::ConfirmationHelper
   def process
     update_evaluation_form
 
