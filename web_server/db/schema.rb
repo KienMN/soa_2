@@ -31,10 +31,8 @@ ActiveRecord::Schema.define(version: 20180417082452) do
     t.integer "classification", default: 0
     t.bigint "semester_id"
     t.bigint "student_id"
-    t.bigint "class_president_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["class_president_id"], name: "index_evaluation_forms_on_class_president_id"
     t.index ["semester_id"], name: "index_evaluation_forms_on_semester_id"
     t.index ["student_id"], name: "index_evaluation_forms_on_student_id"
   end
@@ -74,7 +72,6 @@ ActiveRecord::Schema.define(version: 20180417082452) do
   add_foreign_key "comments", "evaluation_forms"
   add_foreign_key "comments", "users"
   add_foreign_key "evaluation_forms", "semesters"
-  add_foreign_key "evaluation_forms", "users", column: "class_president_id"
   add_foreign_key "evaluation_forms", "users", column: "student_id"
   add_foreign_key "organization_users", "organizations"
   add_foreign_key "organization_users", "users"

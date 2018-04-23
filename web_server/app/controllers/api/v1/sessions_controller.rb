@@ -1,15 +1,17 @@
 class Api::V1::SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :load_user_authentication
-  before_action -> { pre_processing }
-
-  include Session::SessionHelper
 
   def create
-    render json: @action.status
-  end
+    @auth_token = JsonWebToken.encode(user_id: @user.id)
 
-  def destroy
-    render json: @action.status
+    render json: {
+      :code    => Settings.code.success,
+      :message => "Đăng nhập thành công",
+      :data    => {
+        :user  => @user,
+        :token => @auth_token,
+      }
+    }
   end
 end
