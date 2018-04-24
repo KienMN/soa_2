@@ -51,8 +51,8 @@ namespace :test_request do
     uri = URI.parse("http://localhost:3000/api/v1/sign_in")
     res = Net::HTTP.post_form(uri, 'username' => "employee", 'password' => "12345678")
 
-    uri = URI.parse("http://localhost:3000/api/v1/employee/evaluation_forms")
-    params = {'page' => '1'}
+    uri = URI.parse("http://localhost:3000/api/v1/employee/evaluation_forms?page=1")
+    # params = {'page' => '1'}
 
     headers = {
       'Authorization' => "Bearer #{JSON.parse(res.body)['data']['token']}",
@@ -60,7 +60,7 @@ namespace :test_request do
     }
 
     http = Net::HTTP.new(uri.host, uri.port)
-    response = http.get(uri.path, params.to_json, headers)
+    response = http.get(uri.path, headers)
     output = response.body
 
     puts output
