@@ -6,7 +6,9 @@ module Employee::Comment::CreateHelper
   end
 
   def create_comment
-    @new_comment = ::Comment.create(comment_params)
+    @new_comment = ::Comment.create(comment_params.merge(
+      user_id: @current_user.id
+    ))
   end
 
   def generate_status
@@ -19,6 +21,6 @@ module Employee::Comment::CreateHelper
 
   private
   def comment_params
-    @params.permit(:content, :user_id, :evaluation_id)
+    @params.permit(:content, :evaluation_form_id)
   end
 end
