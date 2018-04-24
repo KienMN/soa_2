@@ -1,4 +1,4 @@
-module Employee::EvaluationForm::ShowHelper
+module Employees::EvaluationForm::ShowHelper
   def process
     get_evaluation_form
 
