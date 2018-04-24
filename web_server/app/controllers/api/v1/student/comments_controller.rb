@@ -1,6 +1,7 @@
 class Api::V1::Student::CommentsController < ApplicationController
+  before_action :authenticate_request!
   skip_before_action :verify_authenticity_token
-  before_action -> {pre_processing}
+  before_action -> { pre_processing }
 
   include Stduent::Comment::CommentHelper
 

@@ -1,4 +1,4 @@
-module Employees::EvaluationForm::DestroyHelper
+module Employee::EvaluationForm::DestroyHelper
   def process
     delete_evaluation_form
 

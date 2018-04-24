@@ -10,8 +10,8 @@ module Adviser::Comment::CommentHelper
   private
 
   def validate_role
-    if @current_user.type == "Adviser"
-      raise Exeception.new("Không cho phép truy cập")
+    if @current_user.type != "Adviser"
+      raise Exception.new("Không cho phép truy cập")
     end
   end
 
