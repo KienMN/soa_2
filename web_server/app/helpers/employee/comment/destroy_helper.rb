@@ -1,4 +1,4 @@
-module Employee::Comment::DestroyHelper
+module Employees::Comment::DestroyHelper
   def process
     destroy_comment
 
