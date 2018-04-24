@@ -1,5 +1,5 @@
 module Employee::EvaluationForm::EvaluationFormHelper
-  def process
+  def pre_processing
     validate_role
 
     generate_action
