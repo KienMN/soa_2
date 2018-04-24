@@ -1,4 +1,4 @@
-module Employees::EvaluationForm::EvaluationFormHelper
+module Employee::EvaluationForm::EvaluationFormHelper
   def process
     validate_role
 
@@ -10,8 +10,8 @@ module Employees::EvaluationForm::EvaluationFormHelper
   private
 
   def validate_role
-    if @current_user.type == "Employee"
-      raise Exeception.new("Không cho phép truy cập")
+    if @current_user.type != "Employee"
+      raise Exception.new("Không cho phép truy cập")
     end
   end
 
@@ -50,7 +50,7 @@ module Employees::EvaluationForm::EvaluationFormHelper
   end
 
   class Create < Base
-    include Employees::EvaluationForm::CreateHelper
+    include Employee::EvaluationForm::CreateHelper
 
     def initialize(options)
       super(options)
@@ -58,7 +58,7 @@ module Employees::EvaluationForm::EvaluationFormHelper
   end
 
   class Index < Base
-    include Employees::EvaluationForm::IndexHelper
+    include Employee::EvaluationForm::IndexHelper
 
     def initialize(options)
       super(options)
@@ -66,7 +66,7 @@ module Employees::EvaluationForm::EvaluationFormHelper
   end
 
   class Show < Base
-    include Employees::EvaluationForm::ShowHelper
+    include Employee::EvaluationForm::ShowHelper
 
     def initialize(options)
       super(options)
@@ -74,7 +74,7 @@ module Employees::EvaluationForm::EvaluationFormHelper
   end
 
   class Destroy < Base
-    include Employees::EvaluationForm::DestroyHelper
+    include Employee::EvaluationForm::DestroyHelper
 
     def initialize(options)
       super(options)

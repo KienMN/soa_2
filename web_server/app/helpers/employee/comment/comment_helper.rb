@@ -1,4 +1,4 @@
-module Employees::Comment::CommentHelper
+module Employee::Comment::CommentHelper
   def pre_processing
     validate_role
 
@@ -10,8 +10,8 @@ module Employees::Comment::CommentHelper
   private
 
   def validate_role
-    if @current_user.type == "Employee"
-      raise Exeception.new("Không cho phép truy cập")
+    if @current_user.type != "Employee"
+      raise Exception.new("Không cho phép truy cập")
     end
   end
 
@@ -42,7 +42,7 @@ module Employees::Comment::CommentHelper
   end
 
   class Create < Base
-    include Employees::Comment::CreateHelper
+    include Employee::Comment::CreateHelper
 
     def initialize(options)
       super(options)
@@ -50,7 +50,7 @@ module Employees::Comment::CommentHelper
   end
 
   class Destroy < Base
-    include Employees::Comment::DestroyHelper
+    include Employee::Comment::DestroyHelper
 
     def initialize(options)
       super(options)

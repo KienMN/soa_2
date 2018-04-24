@@ -1,4 +1,4 @@
-module Employees::EvaluationForm::IndexHelper
+module Employee::EvaluationForm::IndexHelper
   def process
     get_evaluation_forms
 
