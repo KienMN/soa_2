@@ -11,13 +11,12 @@ namespace :sample_data do
     class_president = ClassPresident.create(
       username: "class_president", password: "12345678"
     )
-    Student.bulk_insert do |worker|
-      10.times do |i|
-        worker.add(
-          username: "student-#{i}",
-          password: "12345678"
-        )
-      end
+
+    10.times do |i|
+      Student.create(
+        username: "student-#{i}",
+        password: "12345678"
+      )
     end
 
     puts "Create Organization"

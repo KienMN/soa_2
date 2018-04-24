@@ -7,7 +7,7 @@ module ClassPresident::Comment::CreateHelper
 
   def create_comment
     @evaluation_form = ::EvaluationForm.eager_load(student: [:organization])
-      .find_by(id: @params[:evaluation_id], status: ::EvaluationForm.statuses[:avaiable])
+      .find_by(id: @params[:evaluation_form_id], status: ::EvaluationForm.statuses[:avaiable])
 
     organization_user = ::OrganizationUser.find_by(
       id: @evaluation_form.student.organization.id,
@@ -15,7 +15,9 @@ module ClassPresident::Comment::CreateHelper
     )
 
     if organization_user.present?
-      @new_comment = ::Comment.create(comment_params)
+      @new_comment = ::Comment.create(comment_params.merge(
+        user_id: @current_user.id
+      ))
     end
   end
 
@@ -29,6 +31,6 @@ module ClassPresident::Comment::CreateHelper
 
   private
   def comment_params
-    @params.permit(:content, :user_id, :evaluation_id)
+    @params.permit(:content, :evaluation_form_id)
   end
 end
