@@ -29,7 +29,10 @@ module ApplicationHelper
   end
 
   def generate_query_hash
-    return {username: user_params[:username]}
+    return {
+      username: user_params[:username],
+      password: user_params[:password]
+    }
   end
 
   def username_checking
@@ -37,7 +40,7 @@ module ApplicationHelper
   end
 
   def account_validation
-    if not (@user.present? and @user.valid_password?(user_params[:password]))
+    if @user.blank?
       return render json: {
         :code => Settings.code.failure,
         :message => "Tên đăng nhập hoặc mật khẩu không đúng"
