@@ -27,10 +27,10 @@ Rails.application.routes.draw do
 
       namespace :employee do
         resources :comments, only: [:create, :destroy]
-        resources :evaluation_forms, only: [:index, :show]
-        resources :semesters, only: [:create, :update, :show, :index, :destroy] do
+        resources :evaluation_forms, only: [:index, :show] do
           get :confirmation, on: :collection
         end
+        resources :semesters, only: [:create, :update, :show, :index, :destroy]
       end
     end
   end

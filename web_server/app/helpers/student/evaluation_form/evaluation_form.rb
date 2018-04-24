@@ -10,8 +10,8 @@ module Student::EvaluationForm::EvaluationFormHelper
   private
 
   def validate_role
-    if @current_user.type == "Student"
-      raise Exeception.new("Không cho phép truy cập")
+    if @current_user.type != "Student"
+      raise Exception.new("Không cho phép truy cập")
     end
   end
 

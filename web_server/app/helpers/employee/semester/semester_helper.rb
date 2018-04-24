@@ -10,8 +10,8 @@ module Employee::Semester::SemesterHelper
   private
 
   def validate_role
-    if @current_user.type == "Employee"
-      raise Exeception.new("Không cho phép truy cập")
+    if @current_user.type != "Employee"
+      raise Exception.new("Không cho phép truy cập")
     end
   end
 

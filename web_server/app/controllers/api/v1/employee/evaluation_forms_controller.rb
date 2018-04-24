@@ -1,8 +1,9 @@
 class Api::V1::Employee::EvaluationFormsController < ApplicationController
+  before_action :authenticate_request!
   skip_before_action :verify_authenticity_token
   before_action -> { pre_processing }
 
-  include Employees::EvaluationForm::EvaluationFormHelper
+  include Employee::EvaluationForm::EvaluationFormHelper
 
   def create
     render json: @action.status

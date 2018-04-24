@@ -10,8 +10,8 @@ module ClassPresident::Comment::CommentHelper
   private
 
   def validate_role
-    if @current_user.type == "ClassPresident"
-      raise Exeception.new("Không cho phép truy cập")
+    if @current_user.type != "ClassPresident"
+      raise Exception.new("Không cho phép truy cập")
     end
   end
 

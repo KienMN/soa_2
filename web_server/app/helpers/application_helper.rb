@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def user_session_assignment
     if session[:user].blank?
-      session[:user] = User.get_user_with_group({id: @payload.first['user_id']})
+      session[:user] = User.find_by(id: @payload.first['user_id'])
     end
   end
 
