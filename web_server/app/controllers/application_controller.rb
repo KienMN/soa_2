@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
 
     query_hash = generate_query_hash
 
-    @user = User.find_by query_hash
+    @user = User.find_by(query_hash)
 
     account_validation
   end

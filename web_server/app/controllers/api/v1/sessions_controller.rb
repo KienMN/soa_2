@@ -9,7 +9,7 @@ class Api::V1::SessionsController < ApplicationController
       :code    => Settings.code.success,
       :message => "Đăng nhập thành công",
       :data    => {
-        :user  => @user,
+        :user  => @user.attributes,
         :token => @auth_token,
       }
     }
