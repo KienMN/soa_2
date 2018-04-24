@@ -1,4 +1,4 @@
-module Employee::EvaluationForm::CreateHelper
+module Employees::EvaluationForm::CreateHelper
   def process
     create_evaluation_form
 

@@ -1,4 +1,4 @@
-module Employee::Comment::CreateHelper
+module Employees::Comment::CreateHelper
   def process
     create_comment
 

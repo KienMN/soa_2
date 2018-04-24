@@ -1,4 +1,4 @@
-module Employee::EvaluationForm::EvaluationFormHelper
+module Employees::EvaluationForm::EvaluationFormHelper
   def process
     validate_role
 
@@ -50,7 +50,7 @@ module Employee::EvaluationForm::EvaluationFormHelper
   end
 
   class Create < Base
-    include Employee::EvaluationForm::CreateHelper
+    include Employees::EvaluationForm::CreateHelper
 
     def initialize(options)
       super(options)
@@ -58,7 +58,7 @@ module Employee::EvaluationForm::EvaluationFormHelper
   end
 
   class Index < Base
-    include Employee::EvaluationForm::IndexHelper
+    include Employees::EvaluationForm::IndexHelper
 
     def initialize(options)
       super(options)
@@ -66,7 +66,7 @@ module Employee::EvaluationForm::EvaluationFormHelper
   end
 
   class Show < Base
-    include Employee::EvaluationForm::ShowHelper
+    include Employees::EvaluationForm::ShowHelper
 
     def initialize(options)
       super(options)
@@ -74,7 +74,7 @@ module Employee::EvaluationForm::EvaluationFormHelper
   end
 
   class Destroy < Base
-    include Employee::EvaluationForm::DestroyHelper
+    include Employees::EvaluationForm::DestroyHelper
 
     def initialize(options)
       super(options)

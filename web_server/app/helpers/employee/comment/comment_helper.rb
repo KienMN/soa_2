@@ -1,4 +1,4 @@
-module Employee::Comment::CommentHelper
+module Employees::Comment::CommentHelper
   def pre_processing
     validate_role
 
@@ -42,7 +42,7 @@ module Employee::Comment::CommentHelper
   end
 
   class Create < Base
-    include Employee::Comment::CreateHelper
+    include Employees::Comment::CreateHelper
 
     def initialize(options)
       super(options)
@@ -50,7 +50,7 @@ module Employee::Comment::CommentHelper
   end
 
   class Destroy < Base
-    include Employee::Comment::DestroyHelper
+    include Employees::Comment::DestroyHelper
 
     def initialize(options)
       super(options)
