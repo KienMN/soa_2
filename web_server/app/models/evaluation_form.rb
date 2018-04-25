@@ -1,7 +1,7 @@
 class EvaluationForm < ApplicationRecord
   has_many :comments
   belongs_to :semester
-  belongs_to :student, class_name: "Student", foreign_key: "user_id"
+  belongs_to :student, class_name: "Student", foreign_key: "student_id"
 
   enum status: [:avaiable, :complete, :closed, :out_of_date]
   enum classification: [:weak, :medium, :middling, :good, :excellent]
@@ -166,7 +166,7 @@ class EvaluationForm < ApplicationRecord
   }
 
   def update_confirmation(type)
-    confirmation_value = ::EvaluationForm::COMFIRMATION[type]
+    confirmation_value = EvaluationForm::COMFIRMATION[type]
 
     if self.confirmation % confirmation_value == 0
       self.update_attributes(
@@ -175,6 +175,12 @@ class EvaluationForm < ApplicationRecord
     else
       self.update_attributes(
         confirmation: self.confirmation * confirmation_value
+      )
+    end
+
+    if self.confirmation == EvaluationForm::COMFIRMATION.values.inject(:*)
+      self.update_attributes(
+        status: EvaluationForm.statuses[:complete]
       )
     end
   end

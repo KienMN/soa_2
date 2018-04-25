@@ -8,10 +8,9 @@ module Student::EvaluationForm::UpdateHelper
   private
 
   def update_evaluation_form
-    @evaluation_form = ::EvaluationForm.find_by(
-        id: @params[:id],
-        student_id: @current_user.id)
-      .update_attributes(evaluation_form_params)
+    @evaluation_form = ::EvaluationForm.find_by(id: @params[:id], student_id: @current_user.id)
+
+    @evaluation_form.update_attributes(evaluation_form_params)
   end
 
   def generate_status
@@ -23,8 +22,7 @@ module Student::EvaluationForm::UpdateHelper
   end
 
   def evaluation_form_params
-    @params.permit(
-      :student_assessment,
-      :target_assignment => [])
+    all_options = @params[:target_assignment].try(:permit!)
+    @params.permit(:self_assessment).merge(:target_assignment => all_options)
   end
 end

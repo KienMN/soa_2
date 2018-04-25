@@ -8,18 +8,16 @@ module ClassPresident::EvaluationForm::UpdateHelper
   private
 
   def update_evaluation_form
-    @evaluation_form = ::EvaluationForm.find_by(id: @params[:id])
-      .update_attributes(evaluation_form_params)
-
     @organization_users = ::OrganizationUser.joins(:organization)
       .where(user_id: @current_user.id)
       .where("organizations.status = #{::Organization.type_organizations[:class]}")
-      .pluck(:id)[0]
+      .pluck(:id)
 
     @evaluation_form = ::EvaluationForm.joins(student: [:organization_users])
-      .where("organization_users.organization_id in (?)", @organization_users)
-      .where(id: @params[:id]).limit(1)
-      .update_attributes(evaluation_form_params)
+      .find_by("organization_users.organization_id in (#{@organization_users.join(',')})
+        and evaluation_forms.id = #{@params[:id]}")
+
+    @evaluation_form.update_attributes(evaluation_form_params)
   end
 
   def generate_status
@@ -31,8 +29,7 @@ module ClassPresident::EvaluationForm::UpdateHelper
   end
 
   def evaluation_form_params
-    @params.permit(
-      :class_president_assessment,
-      :target_assignment => [])
+    all_options = @params[:target_assignment].try(:permit!)
+    @params.permit(:class_president_assessment).merge(:target_assignment => all_options)
   end
 end

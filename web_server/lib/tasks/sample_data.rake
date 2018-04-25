@@ -2,7 +2,7 @@ namespace :sample_data do
   desc "Task description"
   task generate: :environment do
     puts "Create User"
-    Adviser.create(
+    adviser = Adviser.create(
       username: "adviser", password: "12345678"
     )
     Employee.create(
@@ -33,6 +33,11 @@ namespace :sample_data do
           organization_id: class_1.id
         )
       end
+
+      worker.add(
+        user_id: adviser.id,
+        organization_id: class_1.id
+      )
     end
 
     puts "Create Semester"
