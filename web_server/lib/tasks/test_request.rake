@@ -100,7 +100,7 @@ namespace :test_request do
     uri = URI.parse("http://localhost:3000/api/v1/student/evaluation_forms/1")
     params = {
       :target_assignment => EvaluationForm.generate_form,
-      :self_assessment   => 0
+      :self_assessment   => 70
     }
 
     headers = {

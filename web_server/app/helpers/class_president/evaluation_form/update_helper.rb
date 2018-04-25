@@ -16,7 +16,8 @@ module ClassPresident::EvaluationForm::UpdateHelper
     @evaluation_form = ::EvaluationForm.joins(student: [:organization_users])
       .find_by("organization_users.organization_id in (#{@organization_users.join(',')})
         and evaluation_forms.id = #{@params[:id]}")
-      .update_attributes(evaluation_form_params)
+
+    @evaluation_form.update_attributes(evaluation_form_params)
   end
 
   def generate_status
