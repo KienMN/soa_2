@@ -14,7 +14,10 @@ module Student::EvaluationForm::UpdateHelper
       status: EvaluationForm.statuses[:avaiable]
     )
 
-    @evaluation_form.update_attributes(evaluation_form_params)
+    @evaluation_form.calculate_score(
+      evaluation_form_params[:target_assignment],
+      :self_assessment
+    )
   end
 
   def generate_status
