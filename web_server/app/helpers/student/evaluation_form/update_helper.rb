@@ -23,8 +23,7 @@ module Student::EvaluationForm::UpdateHelper
   end
 
   def evaluation_form_params
-    @params.permit(
-      :self_assessment,
-      :target_assignment => [])
+    all_options = @params[:target_assignment].try(:permit!)
+    @params.permit(:self_assessment).merge(:target_assignment => all_options)
   end
 end
