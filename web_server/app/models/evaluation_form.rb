@@ -1,5 +1,5 @@
 class EvaluationForm < ApplicationRecord
-  has_many :comments
+  has_many :comments, dependent: :destroy
   belongs_to :semester
   belongs_to :student, class_name: "Student", foreign_key: "student_id"
 
