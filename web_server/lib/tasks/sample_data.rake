@@ -57,8 +57,7 @@ namespace :sample_data do
         worker.add(
           target_assignment: EvaluationForm.generate_form,
           semester_id: semester.id,
-          student_id: student.id,
-          class_president: class_president.id,
+          student_id: student.id
         )
       end
     end
