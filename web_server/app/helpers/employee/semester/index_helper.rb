@@ -21,7 +21,8 @@ module Employee::Semester::IndexHelper
       :data    => {
         :page      => @params[:page],
         :per_page  => Settings.per_page,
-        :semesters => @semesters
+        :semesters => @semesters,
+        :total_entries => @semesters.total_entries
       }
     }
   end
