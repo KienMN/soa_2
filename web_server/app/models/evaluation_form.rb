@@ -315,7 +315,7 @@ class EvaluationForm < ApplicationRecord
           }
         },
         special_achivement: {
-          score: 10,
+          score: 0,
           sub_fields: {
             important_position:    {score: 0},
             high_competion_result: {score: 0},
