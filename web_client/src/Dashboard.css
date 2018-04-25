@@ -1,0 +1,30 @@
+.sideMenu li .active a {
+    background-color: black;
+}
+
+.sideMenu a {
+    color: black;
+    font-size: 17px;
+}
+
+#sideMenu .active {
+    background-color: #222;
+}
+
+.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    background-color: #c8c8c8;
+    color: #333;
+}
+
+.nav-pills>li>a {
+    border-radius: 0px;
+}
+
+.navbar {
+    margin-bottom: 0px;
+    border-radius: 0px;
+}
+
+.btn-toolbar>.btn {
+    float: right;
+}

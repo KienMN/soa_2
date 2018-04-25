@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Form, FormGroup, Col, Button, ControlLabel, FormControl, Checkbox, HelpBlock} from 'react-bootstrap'
+import React, { Component } from 'react';
+import { Form, FormGroup, Col, Button, ControlLabel, FormControl, Checkbox, HelpBlock } from 'react-bootstrap'
 
 class PointForm extends Component {
 	constructor(props) {
@@ -13,7 +13,7 @@ class PointForm extends Component {
 	}
 
 	onChange(e) {
-		alert(typeof(e.target.value) == "")
+		alert(typeof (e.target.value) == "")
 	}
 
 	render() {
@@ -27,13 +27,13 @@ class PointForm extends Component {
 						<ControlLabel>Kết quả học tập kém</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 3 điểm</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 3 điểm</HelpBlock>
 					</Col>
-					
+
 				</FormGroup>
 
 				<FormGroup>
@@ -41,11 +41,11 @@ class PointForm extends Component {
 						<ControlLabel>Cảnh báo học vụ</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 5 điểm</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 5 điểm</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -54,11 +54,11 @@ class PointForm extends Component {
 						<ControlLabel>Đăng ký thiếu tín chỉ</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 5 điểm</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 5 điểm</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -67,11 +67,11 @@ class PointForm extends Component {
 						<ControlLabel>Bỏ thi</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 2 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 2 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -83,11 +83,11 @@ class PointForm extends Component {
 						<ControlLabel>Nộp hoặc nhận tiền sai</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 5 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 5 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -96,11 +96,11 @@ class PointForm extends Component {
 						<ControlLabel>Đăng ký học muộn</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 2 điểm</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 2 điểm</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -109,11 +109,11 @@ class PointForm extends Component {
 						<ControlLabel>Vắng mặt trong các buổi triệu tập</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 5 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 5 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -122,11 +122,11 @@ class PointForm extends Component {
 						<ControlLabel>Trả tài liệu, hồ sơ muộn</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 5 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 5 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -135,14 +135,14 @@ class PointForm extends Component {
 						<ControlLabel>Vi phạm quy định tại địa phương</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 10 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 10 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
-				
+
 
 				<div>
 					<h4>Các hoạt động ngoại khoá</h4>
@@ -152,11 +152,11 @@ class PointForm extends Component {
 						<ControlLabel>Tham gia đầy đủ các hoạt động</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Cộng 10 điểm</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Cộng 10 điểm</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -165,11 +165,11 @@ class PointForm extends Component {
 						<ControlLabel>Tham gia các hoạt động bên ngoài</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Cộng 2 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Cộng 2 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -178,11 +178,11 @@ class PointForm extends Component {
 						<ControlLabel>Vắng mặt trong các hoạt động</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 2 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 2 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -195,11 +195,11 @@ class PointForm extends Component {
 						<ControlLabel>Mất đoàn kết tập thể</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Trừ 5 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Trừ 5 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -212,11 +212,11 @@ class PointForm extends Component {
 						<ControlLabel>Giữ chức vụ quan trọng</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Cộng 10 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Cộng 10 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
 
@@ -225,20 +225,20 @@ class PointForm extends Component {
 						<ControlLabel>Đạt giải cao trong các cuộc thi, NCKH</ControlLabel>
 					</Col>
 					<Col sm={6}>
-					<FormControl
-						type="number"
-						placeholder="Điền điểm"
-					/>
-					<HelpBlock>Cộng 5 điểm/lần</HelpBlock>
+						<FormControl
+							type="number"
+							placeholder="Điền điểm"
+						/>
+						<HelpBlock>Cộng 5 điểm/lần</HelpBlock>
 					</Col>
 				</FormGroup>
 				<FormGroup>
 					<Col smOffset={5} sm={2}>
-						<Button type="submit" bsStyle="primary" bsSize="large" block>Xác nhận</Button>	
+						<Button type="submit" bsStyle="primary" bsSize="large" block>Xác nhận</Button>
 					</Col>
-					
+
 				</FormGroup>
-				
+
 
 			</Form>
 		)
