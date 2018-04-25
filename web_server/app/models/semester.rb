@@ -1,5 +1,5 @@
 class Semester < ApplicationRecord
-  has_many :evaluation_forms
+  has_many :evaluation_forms, dependent: :destroy
 
   enum status: [:avaiable, :closed]
 
