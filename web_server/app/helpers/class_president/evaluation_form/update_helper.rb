@@ -28,8 +28,7 @@ module ClassPresident::EvaluationForm::UpdateHelper
   end
 
   def evaluation_form_params
-    @params.permit(
-      :class_president_assessment,
-      :target_assignment => [])
+    all_options = @params[:target_assignment].try(:permit!)
+    @params.permit(:class_president_assessment).merge(:target_assignment => all_options)
   end
 end
