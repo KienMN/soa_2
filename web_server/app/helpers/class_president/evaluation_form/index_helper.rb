@@ -13,9 +13,18 @@ module ClassPresident::EvaluationForm::IndexHelper
       .where("organizations.type_organization = #{::Organization.type_organizations[:class]}")
       .pluck(:organization_id)
 
-    @evaluation_forms = ::EvaluationForm.joins(student: [:organization_users])
+    @evaluation_forms = ::EvaluationForm.eager_load(student: [:organization_users])
       .where("organization_users.organization_id in (?)", @organizations)
       .paginate(page: @params[:page], per_page: Settings.per_page)
+
+    @result = []
+
+    @evaluation_forms.each do |e|
+      tmp = e.attributes
+      tmp.merge!("username" => e.student.username)
+
+      @result << tmp
+    end
   end
 
   def generate_status
@@ -23,7 +32,7 @@ module ClassPresident::EvaluationForm::IndexHelper
       :code    => Settings.code.success,
       :message => "",
       :data    => {
-        :evaluation_forms => @evaluation_forms,
+        :evaluation_forms => @result,
         :page             => @params[:page],
         :per_page         => Settings.per_page,
         :total_entries    => @evaluation_forms.total_entries
