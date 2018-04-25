@@ -17,10 +17,12 @@ class Dashboard extends Component {
 		this.isLoggedIn = this.isLoggedIn.bind(this);
 	}
 
+	// Verifying whether user is logged in or not
 	isLoggedIn() {
 		return !(localStorage.getItem("username") === null)
 	}
 
+	// Handling click on side menu
 	handleSideMenuClick(selectedKey) {
 		this.setState({
 			activeKey: selectedKey
@@ -28,6 +30,7 @@ class Dashboard extends Component {
 	}
 
 	render() {
+		// Routing to login page if user is not logged in
 		if (!this.isLoggedIn()) {
 			window.location.href = "http://127.0.0.1:8088/login"
 		}

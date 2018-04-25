@@ -74,17 +74,20 @@ export default class EvaluationForm extends Component {
 		this.postComment = this.postComment.bind(this);
 	}
 
+	// Handling comment changing
 	onCommentChange(e) {
 		this.setState({
 			newComment: e.target.value
 		})
 	}
 
+	// Handling comment posting
 	postComment(e) {
 		e.preventDefault();
 		alert(this.state.newComment);
 	}
 
+	// Enabling or disabling editable fields
 	changeEditable(e) {
 		e.preventDefault();
 		if (this.state.status === "avaiable") {
@@ -96,13 +99,14 @@ export default class EvaluationForm extends Component {
 		}
 	}
 
+	// Handling fields changing
 	onChange(e) {
 		this.setState({
 			[e.target.name]: e.target.value,
 		})
 	}
 
-	// Updateting evaluation form
+	// Submiting, depends on type of user
 	onSubmit() {
 		let token = localStorage.getItem("tokenId");
 		let type = localStorage.getItem("type");
@@ -264,7 +268,6 @@ export default class EvaluationForm extends Component {
 				}
 				)
 		} else if (type === "Employee") {
-			// let confirmationUri = "http://127.0.0.1:3000/api/v1/employee/semesters/confirmation?id=" + this.state.evaluationFormId
 			let confirmationUri = this.state.baseUri + "/confirmation/?id=" + this.state.evaluationFormId
 			fetch(confirmationUri, {
 				method: "PUT",
@@ -288,6 +291,7 @@ export default class EvaluationForm extends Component {
 		}
 	}
 
+	// Fetching data before rendering
 	componentDidMount() {
 		let token = localStorage.getItem("tokenId");
 		// alert(`Bearer ${token}`);
@@ -336,10 +340,11 @@ export default class EvaluationForm extends Component {
 			editButton = (this.state.editable) ? <Button bsStyle="warning" onClick={this.changeEditable}>Xong</Button> : <Button bsStyle="warning" onClick={this.changeEditable}>Sửa</Button>
 		}
 
-		const studentFormView = (
+		const view = (
 			<div>
 				<h3>Học kỳ: {this.state.semesterTitle}</h3>
 				<hr />
+				{/* Evaluation form part */}
 				<Form horizontal>
 					<FormGroup>
 						<Col sm={4} smOffset={1}>
@@ -690,6 +695,7 @@ export default class EvaluationForm extends Component {
 					</ButtonToolbar>
 				</Form>
 				<hr />
+				{/* Comment part */}
 				<h3>Bình luận</h3>
 				<hr />
 				<Comment user="kien" content="hello" />
@@ -701,7 +707,7 @@ export default class EvaluationForm extends Component {
 		)
 		return (
 			<div>
-				{studentFormView}
+				{view}
 			</div>
 		)
 	}

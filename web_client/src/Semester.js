@@ -32,18 +32,21 @@ export default class Semester extends Component {
 		})
 	}
 
+	// Handling showing of creating new semester form
 	showCreateForm() {
 		this.setState({
 			createFormShow: true
 		})
 	}
 
+	// Handling hiding of creating new semester form
 	handleCreateFormClose() {
 		this.setState({
 			createFormShow: false
 		})
 	}
 
+	// Creating new semester
 	onSubmit(e) {
 		e.preventDefault();
 		if (this.state.newSemesterTitle !== "") {
@@ -81,6 +84,7 @@ export default class Semester extends Component {
 		})
 	}
 
+	// Deleting selected semester
 	deleteSemester(e) {
 		e.preventDefault();
 		let uri = this.state.baseUri + "/" + this.state.deleteSemesterId;
@@ -100,8 +104,8 @@ export default class Semester extends Component {
 		})
 	}
 
+	// Switching amongs semester pages
 	onPageChange(page, sizePerPage) {
-		// Sending request to server
 		let token = localStorage.getItem("tokenId");
 		let uri = this.state.baseUri + "?page=" + page;
 		fetch(uri, {
@@ -121,6 +125,7 @@ export default class Semester extends Component {
 			})
 	}
 
+	// Fetching data before rendering
 	componentDidMount() {
 		let uri = this.state.baseUri + "?page=1";
 		let token = localStorage.getItem("tokenId");
