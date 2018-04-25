@@ -14,21 +14,21 @@ Rails.application.routes.draw do
       namespace :class_president do
         resources :comments, only: [:create, :destroy]
         resources :evaluation_forms, only: [:index, :show, :update] do
-          post :confirmation, on: :collection
+          put :confirmation, on: :collection
         end
       end
 
       namespace :adviser do
         resources :comments, only: [:create, :destroy]
         resources :evaluation_forms, only: [:index, :show, :update] do
-          post :confirmation, on: :collection
+          put :confirmation, on: :collection
         end
       end
 
       namespace :employee do
         resources :comments, only: [:create, :destroy]
         resources :evaluation_forms, only: [:index, :show, :create, :destroy] do
-          post :confirmation, on: :collection
+          put :confirmation, on: :collection
         end
         resources :semesters, only: [:create, :update, :show, :index, :destroy]
       end
