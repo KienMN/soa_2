@@ -38,6 +38,11 @@ namespace :sample_data do
         user_id: adviser.id,
         organization_id: class_1.id
       )
+
+      worker.add(
+        user_id: class_president.id,
+        organization_id: class_1.id
+      )
     end
 
     puts "Create Semester"

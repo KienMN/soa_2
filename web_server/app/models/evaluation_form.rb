@@ -186,6 +186,21 @@ class EvaluationForm < ApplicationRecord
   end
 
   class << self
+    def calculate_score(params)
+      [:study_result,
+        :regulations,
+        :activities,
+        :public_relationship,
+        :special_achivement
+      ].each do |field|
+        if params[field].blank?
+          raise Exception.new("Thất bại")
+        end
+
+        current_field = params[field]
+      end
+    end
+
     def generate_form
       return {
         study_result: {

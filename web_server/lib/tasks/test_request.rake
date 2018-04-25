@@ -114,4 +114,26 @@ namespace :test_request do
 
     puts output
   end
+
+  task class_president_get_evaluation_form: :environment do
+    require 'net/http'
+    require 'uri'
+    require 'json'
+
+    uri = URI.parse("http://localhost:3000/api/v1/sign_in")
+    res = Net::HTTP.post_form(uri, 'username' => "class_president", 'password' => "12345678")
+
+    uri = URI.parse("http://localhost:3000/api/v1/class_president/evaluation_forms?page=1")
+
+    headers = {
+      'Authorization' => "Bearer #{JSON.parse(res.body)['data']['token']}",
+      'Content-Type' =>'application/json'
+    }
+
+    http = Net::HTTP.new(uri.host, uri.port)
+    response = http.get(uri.path, headers)
+    output = response.body
+
+    puts output
+  end
 end
