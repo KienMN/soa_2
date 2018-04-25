@@ -8,17 +8,14 @@ module ClassPresident::EvaluationForm::UpdateHelper
   private
 
   def update_evaluation_form
-    @evaluation_form = ::EvaluationForm.find_by(id: @params[:id])
-      .update_attributes(evaluation_form_params)
-
     @organization_users = ::OrganizationUser.joins(:organization)
       .where(user_id: @current_user.id)
       .where("organizations.status = #{::Organization.type_organizations[:class]}")
       .pluck(:id)
 
     @evaluation_form = ::EvaluationForm.joins(student: [:organization_users])
-      .where("organization_users.organization_id in (?)", @organization_users)
-      .where(id: @params[:id]).limit(1)
+      .find_by("organization_users.organization_id in (#{@organization_users.join(',')})
+        and evaluation_forms.id = #{@params[:id]}")
       .update_attributes(evaluation_form_params)
   end
 
