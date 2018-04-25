@@ -17,7 +17,10 @@ module ClassPresident::EvaluationForm::UpdateHelper
       .find_by("organization_users.organization_id in (#{@organizations.join(',')})
         and evaluation_forms.id = #{@params[:id]}")
 
-    @evaluation_form.update_attributes(evaluation_form_params)
+    @evaluation_form.calculate_score(
+      evaluation_form_params[:target_assignment],
+      :class_president_assessment
+    )
   end
 
   def generate_status

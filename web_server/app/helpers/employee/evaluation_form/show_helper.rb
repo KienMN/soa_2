@@ -8,14 +8,19 @@ module Employee::EvaluationForm::ShowHelper
   private
 
   def get_evaluation_form
-    @evaluation_form = ::EvaluationForm.find_by(id: @params[:id])
+    @evaluation_form = ::EvaluationForm.eager_load(:comments, :semester)
+      .find_by(id: @params[:id])
   end
 
   def generate_status
     @status = {
       :code    => Settings.code.success,
       :message => "",
-      :data    => @evaluation_form
+      :data    => {
+        :evaluation_form => @evaluation_form,
+        :comments        => @evaluation_form.comments,
+        :semester        => @evaluation_form.semester
+      }
     }
   end
 end

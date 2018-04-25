@@ -99,8 +99,43 @@ namespace :test_request do
 
     uri = URI.parse("http://localhost:3000/api/v1/student/evaluation_forms/1")
     params = {
-      :target_assignment => EvaluationForm.generate_form,
-      :self_assessment   => 70
+      target_assignment: {
+        study_result: {
+          sub_fields: {
+            poor_result:        1,
+            warning:            1,
+            not_enough_credits: 1,
+            exam_skip:          1
+          }
+        },
+        regulations: {
+          sub_fields: {
+            wrong_payment:            1,
+            late_course_registration: 1,
+            absence:                  1,
+            late_return:              1,
+            local_regulations:        1
+          }
+        },
+        activities: {
+          sub_fields: {
+            full_participation:  1,
+            addition_activities: 1,
+            activities_absence:  1
+          }
+        },
+        public_relationship: {
+          sub_fields: {
+            disunity: 1
+          }
+        },
+        special_achivement: {
+          sub_fields: {
+            important_position:    1,
+            high_competion_result: 1,
+          }
+        }
+      }
     }
 
     headers = {

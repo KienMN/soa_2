@@ -8,7 +8,8 @@ module Student::EvaluationForm::ShowHelper
   private
 
   def get_evaluation_form
-    @semester = ::EvaluationForm.find_by(
+    @evaluation_form = ::EvaluationForm.eager_load(:comments, :semester)
+    .find_by(
       id: @params[:id],
       student_id: @current_user.id
     )
@@ -18,7 +19,11 @@ module Student::EvaluationForm::ShowHelper
     @status = {
       :code    => Settings.code.success,
       :message => "Thành công",
-      :data    => @semester
+      :data    => {
+        :evaluation_form => @evaluation_form,
+        :comments        => @evaluation_form.comments,
+        :semester        => @evaluation_form.semester
+      }
     }
   end
 end
