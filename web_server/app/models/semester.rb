@@ -1,7 +1,7 @@
 class Semester < ApplicationRecord
   has_many :evaluation_forms
 
-  enum status: [:avaiable, :out_of_date]
+  enum status: [:avaiable, :closed]
 
   def create_evaluation_form
     EvaluationForm.bulk_insert do |worker|

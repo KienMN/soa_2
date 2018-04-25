@@ -11,6 +11,10 @@ module Employee::Semester::UpdateHelper
     @semester = ::Semester.find_by(@params[:id])
 
     @semester.update_attributes(semester_params)
+
+    if @semester.status.closed?
+      @semester.evaluation_forms.update_all(status: ::EvaluationForm.statuses[:closed])
+    end
   end
 
   def generate_status
