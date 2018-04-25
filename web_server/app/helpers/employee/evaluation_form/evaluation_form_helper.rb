@@ -33,6 +33,10 @@ module Employee::EvaluationForm::EvaluationFormHelper
       @action = Destroy.new({
         params: params, current_user: @current_user
       })
+    when 'confirmation'
+      @action = Confirmation.new({
+        params: params, current_user: @current_user
+      })
     end
   end
 
@@ -75,6 +79,14 @@ module Employee::EvaluationForm::EvaluationFormHelper
 
   class Destroy < Base
     include Employee::EvaluationForm::DestroyHelper
+
+    def initialize(options)
+      super(options)
+    end
+  end
+
+  class Confirmation < Base
+    include Employee::EvaluationForm::ConfirmationHelper
 
     def initialize(options)
       super(options)
