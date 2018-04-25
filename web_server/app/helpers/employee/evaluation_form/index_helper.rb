@@ -20,7 +20,8 @@ module Employee::EvaluationForm::IndexHelper
       :data    => {
         :evaluation_forms => @evaluation_forms,
         :page             => @params[:page],
-        :per_page         => Settings.per_page
+        :per_page         => Settings.per_page,
+        :total_entries    => @evaluation_forms.total_entries
       }
     }
   end
