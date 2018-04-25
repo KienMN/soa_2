@@ -24,7 +24,7 @@ module Student::EvaluationForm::UpdateHelper
 
   def evaluation_form_params
     @params.permit(
-      :student_assessment,
+      :self_assessment,
       :target_assignment => [])
   end
 end
