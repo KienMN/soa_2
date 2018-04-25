@@ -7,9 +7,9 @@ module ClassPresident::Comment::CreateHelper
 
   def create_comment
     @evaluation_form = ::EvaluationForm.eager_load(student: [:organizations])
-      .where(id: @params[:evaluation_form_id], status: ::EvaluationForm.statuses[:avaiable])
-      .where("organizations.type_organization = #{Organization.type_organizations[:class]}")
-      .first
+      .find_by("evaluation_forms.id = #{@params[:evaluation_form_id]} and
+                evaluation_forms.status = #{::EvaluationForm.statuses[:avaiable]} and
+                organizations.type_organization = #{Organization.type_organizations[:class]}")
 
     organization_users = ::OrganizationUser.find_by(
       id: @evaluation_form.student.organizations.map{|x| x.id},

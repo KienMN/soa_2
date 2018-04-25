@@ -10,7 +10,7 @@ module ClassPresident::EvaluationForm::IndexHelper
   def get_evaluation_forms
     @organization_users = ::OrganizationUser.joins(:organization)
       .where(user_id: @current_user.id)
-      .where("organizations.status = #{::Organization.type_organizations[:class]}")
+      .where("organizations.type_organization = #{::Organization.type_organizations[:class]}")
       .pluck(:id)
 
     @evaluation_forms = ::EvaluationForm.joins(student: [:organization_users])

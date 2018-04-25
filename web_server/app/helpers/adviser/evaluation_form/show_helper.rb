@@ -14,8 +14,8 @@ module Adviser::EvaluationForm::ShowHelper
       .pluck(:id)
 
     @evaluation_form = ::EvaluationForm.joins(student: [:organization_users])
-      .where("organization_users.organization_id in (?)", @organization_users)
-      .where(id: @params[:id]).limit(1)
+      .find_by("organization_users.organization_id in (#{@organization_users.join(',')})
+        and evaluation_forms.id = #{@params[:id]}")
   end
 
   def generate_status

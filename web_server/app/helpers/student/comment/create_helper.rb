@@ -6,10 +6,9 @@ module Student::Comment::CreateHelper
   end
 
   def create_comment
-    @evaluation_form = ::EvaluationForm.eager_load(:student)
-      .find_by(id: @params[:evaluation_form_id])
+    @evaluation_form = ::EvaluationForm.find_by(id: @params[:evaluation_form_id])
 
-    if @evaluation_form.user_id == @current_user.id
+    if @evaluation_form.student_id == @current_user.id
       @new_comment = ::Comment.create(comment_params.merge(
         user_id: @current_user.id
       ))
