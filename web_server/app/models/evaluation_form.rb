@@ -247,12 +247,12 @@ class EvaluationForm < ApplicationRecord
           filled_form[field.to_sym][:sub_fields][sub_field_key.to_sym][:score] = sub_field_score
           filled_form[field.to_sym][:score] -= sub_field_score
         end
+      end
 
-        if filled_form[field.to_sym][:score] < current_field_s[:min_score] or
-          filled_form[field.to_sym][:score] = current_field_s[:min_score]
-        elsif filled_form[field.to_sym][:score] > current_field_s[:max_score]
-          filled_form[field.to_sym][:score] = current_field_s[:max_score]
-        end
+      if filled_form[field.to_sym][:score] < current_field_s[:min_score]
+        filled_form[field.to_sym][:score] = current_field_s[:min_score]
+      elsif filled_form[field.to_sym][:score] > current_field_s[:max_score]
+        filled_form[field.to_sym][:score] = current_field_s[:max_score]
       end
 
       total_score += filled_form[field.to_sym][:score]
