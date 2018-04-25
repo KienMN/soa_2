@@ -8,7 +8,11 @@ module Student::EvaluationForm::UpdateHelper
   private
 
   def update_evaluation_form
-    @evaluation_form = ::EvaluationForm.find_by(id: @params[:id], student_id: @current_user.id)
+    @evaluation_form = ::EvaluationForm.find_by(
+      id: @params[:id],
+      student_id: @current_user.id,
+      status: EvaluationForm.statuses[:avaiable]
+    )
 
     @evaluation_form.update_attributes(evaluation_form_params)
   end

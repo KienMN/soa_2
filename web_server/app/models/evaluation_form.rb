@@ -182,6 +182,10 @@ class EvaluationForm < ApplicationRecord
       self.update_attributes(
         status: EvaluationForm.statuses[:complete]
       )
+    else
+      self.update_attributes(
+        status: EvaluationForm.statuses[:avaiable]
+      )
     end
   end
 
@@ -198,6 +202,7 @@ class EvaluationForm < ApplicationRecord
         end
 
         current_field = params[field]
+        current_field
       end
     end
 
