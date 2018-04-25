@@ -198,7 +198,9 @@ class EvaluationForm < ApplicationRecord
       )
     end
 
-    if self.confirmation == EvaluationForm::COMFIRMATION.values.inject(:*)
+    if self.confirmation % EvaluationForm::COMFIRMATION[:class_president] == 0 and
+       self.confirmation % EvaluationForm::COMFIRMATION[:employee] == 0 and
+       self.confirmation % EvaluationForm::COMFIRMATION[:adviser] == 0
       self.update_attributes(
         status: EvaluationForm.statuses[:complete]
       )
