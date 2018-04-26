@@ -13,10 +13,17 @@ module ClassPresident::EvaluationForm::ShowHelper
       .where("organizations.type_organization = #{::Organization.type_organizations[:class]}")
       .pluck(:organization_id)
 
-    @evaluation_form = ::EvaluationForm.eager_load(:comments, :semester)
+    @evaluation_form = ::EvaluationForm.eager_load(comments: [:user], :semester)
       .joins(student: [:organization_users])
       .find_by("organization_users.organization_id in (#{@organizations.join(',')})
         and evaluation_forms.id = #{@params[:id]}")
+
+    @comments = []
+    @evaluation_form.comments.each do |c|
+      tmp = c.attributes
+      tmp.merge("username" => c.user.username)
+      @comments << tmp
+    end
   end
 
   def generate_status
@@ -25,7 +32,7 @@ module ClassPresident::EvaluationForm::ShowHelper
       :message => "",
       :data    => {
         :evaluation_form => @evaluation_form,
-        :comments        => @evaluation_form.comments,
+        :comments        => @comments,
         :semester        => @evaluation_form.semester
       }
     }
