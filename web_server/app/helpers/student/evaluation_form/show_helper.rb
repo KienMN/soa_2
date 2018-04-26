@@ -8,11 +8,18 @@ module Student::EvaluationForm::ShowHelper
   private
 
   def get_evaluation_form
-    @evaluation_form = ::EvaluationForm.eager_load(:comments, :semester)
+    @evaluation_form = ::EvaluationForm.eager_load(comments: [:user], :semester)
     .find_by(
       id: @params[:id],
       student_id: @current_user.id
     )
+
+    @comments = []
+    @evaluation_form.comments.each do |c|
+      tmp = c.attributes
+      tmp.merge("username" => c.user.username)
+      @comments << tmp
+    end
   end
 
   def generate_status
@@ -21,7 +28,7 @@ module Student::EvaluationForm::ShowHelper
       :message => "Thành công",
       :data    => {
         :evaluation_form => @evaluation_form,
-        :comments        => @evaluation_form.comments,
+        :comments        => @comments,
         :semester        => @evaluation_form.semester
       }
     }
