@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, Button, ControlLabel, FormControl, Checkbox, HelpBlock } from 'react-bootstrap'
+import { Form, FormGroup, Col, Button, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap'
 
 class PointForm extends Component {
 	constructor(props) {
 		super(props);
 		this.handleBlur = this.handleBlur.bind(this);
-		this.onChange = this.onChange.bind(this);
+		// this.onChange = this.onChange.bind(this);
 	}
 
 	handleBlur(e) {
 		alert(isNaN(parseInt(e.target.value)))
 	}
 
-	onChange(e) {
-		alert(typeof (e.target.value) == "")
-	}
+	// onChange(e) {
+	// 	alert(typeof (e.target.value) === "")
+	// }
 
 	render() {
 		return (

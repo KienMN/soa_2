@@ -41,6 +41,7 @@ export default class PointList extends Component {
 			detailFormShow: false
 		})
 		// window.location.href = "http://127.0.0.1:8088/dashboard";
+		window.location.reload();
 	}
 
 	onRowClick(row) {
@@ -66,13 +67,28 @@ export default class PointList extends Component {
 				// console.log(res);
 				let numberOfForms = res.data.evaluation_forms.length;
 				for (let i = 0; i < numberOfForms; i++) {
-					if (res.data.evaluation_forms[i].status === "avaiable") {
+					if (res.data.evaluation_forms[i].status === "closed") {
+						res.data.evaluation_forms[i].status = "Đã đóng"
+					} else if (res.data.evaluation_forms[i].confirmation % 5 === 0) {
+						res.data.evaluation_forms[i].status = "Đã phê duyệt"
+					} else if (res.data.evaluation_forms[i].confirmation % 3 === 0) {
+						res.data.evaluation_forms[i].status = "Đã phê duyệt bởi cố vấn"
+					} else if (res.data.evaluation_forms[i].confirmation % 2 === 0) {
+						res.data.evaluation_forms[i].status = "Đã phê duyệt bởi lớp trưởng"
+					} else {
 						res.data.evaluation_forms[i].status = "Đang chờ phê duyệt";
-					} else if (res.data.evaluation_forms[i].status === "complete") {
-						(res.data.evaluation_forms[i].status = "Đã phê duyệt")
 					}
+
 					if (res.data.evaluation_forms[i].classification === "weak") {
 						res.data.evaluation_forms[i].classification = "Yếu";
+					} else if (res.data.evaluation_forms[i].classification === "medium") {
+						res.data.evaluation_forms[i].classification = "Trung bình";
+					} else if (res.data.evaluation_forms[i].classification === "middling") {
+						res.data.evaluation_forms[i].classification = "Khá";
+					} else if (res.data.evaluation_forms[i].classification === "good") {
+						res.data.evaluation_forms[i].classification = "Giỏi";
+					} else {
+						res.data.evaluation_forms[i].classification = "Xuất sắc";
 					}
 				}
 				this.setState({
@@ -96,14 +112,21 @@ export default class PointList extends Component {
 			}
 		}).then(res => res.json())
 			.then((res) => {
-				// console.log(res);
+				console.log(res);
 				let numberOfForms = res.data.evaluation_forms.length;
 				for (let i = 0; i < numberOfForms; i++) {
-					if (res.data.evaluation_forms[i].status === "avaiable") {
+					if (res.data.evaluation_forms[i].status === "closed") {
+						res.data.evaluation_forms[i].status = "Đã đóng"
+					} else if (res.data.evaluation_forms[i].confirmation % 5 === 0) {
+						res.data.evaluation_forms[i].status = "Đã phê duyệt"
+					} else if (res.data.evaluation_forms[i].confirmation % 3 === 0) {
+						res.data.evaluation_forms[i].status = "Đã phê duyệt bởi cố vấn"
+					} else if (res.data.evaluation_forms[i].confirmation % 2 === 0) {
+						res.data.evaluation_forms[i].status = "Đã phê duyệt bởi lớp trưởng"
+					} else {
 						res.data.evaluation_forms[i].status = "Đang chờ phê duyệt";
-					} else if (res.data.evaluation_forms[i].status === "complete") {
-						(res.data.evaluation_forms[i].status = "Đã phê duyệt")
 					}
+
 					if (res.data.evaluation_forms[i].classification === "weak") {
 						res.data.evaluation_forms[i].classification = "Yếu";
 					} else if (res.data.evaluation_forms[i].classification === "medium") {
@@ -142,7 +165,7 @@ export default class PointList extends Component {
 					<TableHeaderColumn dataField='self_assessment'>Điểm tự đánh giá</TableHeaderColumn>
 					<TableHeaderColumn dataField='class_president_assessment'>Điểm cán bộ lớp đánh giá</TableHeaderColumn>
 					<TableHeaderColumn dataField='classification'>Xếp loại</TableHeaderColumn>
-					<TableHeaderColumn dataField='status'>Trạng thái</TableHeaderColumn>
+					<TableHeaderColumn width='200' dataField='status'>Trạng thái</TableHeaderColumn>
 				</BootstrapTable>
 
 				<Modal show={this.state.detailFormShow} onHide={this.handleDetailFormClose}>

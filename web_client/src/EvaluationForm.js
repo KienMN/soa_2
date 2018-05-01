@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Col, Button, ButtonToolbar, ControlLabel, FormControl, HelpBlock, PageHeader } from 'react-bootstrap';
+import { Form, FormGroup, Col, Button, ButtonToolbar, ControlLabel, FormControl, HelpBlock } from 'react-bootstrap';
 import Comment from './Comment';
 
 export default class EvaluationForm extends Component {
@@ -35,6 +35,7 @@ export default class EvaluationForm extends Component {
 			baseUri: baseUri,
 			semesterTitle: "",
 			newComment: "",
+			comments: [],
 			poorResult: 0,
 			warning: 0,
 			notEnoughCredits: 0,
@@ -72,6 +73,35 @@ export default class EvaluationForm extends Component {
 		this.onSubmit = this.onSubmit.bind(this);
 		this.onCommentChange = this.onCommentChange.bind(this);
 		this.postComment = this.postComment.bind(this);
+		this.handleBlur = this.handleBlur.bind(this);
+	}
+
+	handleBlur(e) {
+		// alert(e.target.max === "");
+		if (isNaN(parseInt(e.target.value, 10)) || e.target.value === "") {
+			alert("Vui lòng nhập lại điểm")
+			this.setState({
+				[e.target.name]: 0
+			})
+		}
+		if (e.target.max !== "") {
+			let point = parseInt(e.target.value, 10);
+			if (point > e.target.max) {
+				alert("Số lần không vượt quá " + e.target.max);
+				this.setState({
+					[e.target.name]: 0
+				})
+			}
+		}
+		if (e.target.min !== "") {
+			let point = parseInt(e.target.value, 10);
+			if (point < e.target.min) {
+				alert("Số lần không nhỏ hơn " + e.target.min);
+				this.setState({
+					[e.target.name]: 0
+				})
+			}
+		}
 	}
 
 	// Handling comment changing
@@ -83,8 +113,44 @@ export default class EvaluationForm extends Component {
 
 	// Handling comment posting
 	postComment(e) {
-		e.preventDefault();
-		alert(this.state.newComment);
+		// e.preventDefault();
+		let type = localStorage.getItem("type");
+		let token = localStorage.getItem("tokenId");
+		let commentUri = "";
+		switch (type) {
+			case ("ClassPresident"):
+				commentUri = "http://127.0.0.1:3000/api/v1/class_president/comments"
+				break
+			case ("Adviser"):
+				commentUri = "http://127.0.0.1:3000/api/v1/adviser/comments"
+				break
+			case ("Employee"):
+				commentUri = "http://127.0.0.1:3000/api/v1/employee/comments"
+				break
+			default:
+				commentUri = "http://127.0.0.1:3000/api/v1/student/comments"
+		}
+		fetch(commentUri, {
+			method: "POST",
+			headers: {
+				"Authorization": `Bearer ${token}`,
+				'Content-Type': "application/json"
+			},
+			body: JSON.stringify({
+				'content': this.state.newComment,
+				'evaluation_form_id': this.state.evaluationFormId
+			})
+		})
+			.then(res => res.json())
+			.then((res) => { 
+				console.log(res);
+				let newComments = this.state.comments;
+				newComments.push(res.data);
+				this.setState({
+					newComment: "",
+					comments: newComments
+				})
+			})
 	}
 
 	// Enabling or disabling editable fields
@@ -95,7 +161,7 @@ export default class EvaluationForm extends Component {
 				editable: !this.state.editable,
 			})
 		} else {
-			alert("Không thể sửa do phiếu đã được duyệt");
+			alert("Không thể sửa do phiếu đã được duyệt hoặc đã đóng");
 		}
 	}
 
@@ -123,37 +189,37 @@ export default class EvaluationForm extends Component {
 					"target_assignment": {
 						"study_result": {
 							"sub_fields": {
-								"poor_result": parseInt(this.state.poorResult),
-								"warning": parseInt(this.state.warning),
-								"not_enough_credits": parseInt(this.state.notEnoughCredits),
-								"exam_skip": parseInt(this.state.examSkip)
+								"poor_result": parseInt(this.state.poorResult, 10),
+								"warning": parseInt(this.state.warning, 10),
+								"not_enough_credits": parseInt(this.state.notEnoughCredits, 10),
+								"exam_skip": parseInt(this.state.examSkip, 10)
 							}
 						},
 						"regulations": {
 							"sub_fields": {
-								"wrong_payment": parseInt(this.state.wrongPayment),
-								"late_course_registration": parseInt(this.state.lateCourseRegistration),
-								"absence": parseInt(this.state.absence),
-								"late_return": parseInt(this.state.lateReturn),
-								"local_regulations": parseInt(this.state.localRegulations)
+								"wrong_payment": parseInt(this.state.wrongPayment, 10),
+								"late_course_registration": parseInt(this.state.lateCourseRegistration, 10),
+								"absence": parseInt(this.state.absence, 10),
+								"late_return": parseInt(this.state.lateReturn, 10),
+								"local_regulations": parseInt(this.state.localRegulations, 10)
 							}
 						},
 						"activities": {
 							"sub_fields": {
-								"full_participation": parseInt(this.state.fullParticipation),
-								"addition_activities": parseInt(this.state.additionActivities),
-								"activities_absence": parseInt(this.state.activitiesAbsence),
+								"full_participation": parseInt(this.state.fullParticipation, 10),
+								"addition_activities": parseInt(this.state.additionActivities, 10),
+								"activities_absence": parseInt(this.state.activitiesAbsence, 10),
 							}
 						},
 						"public_relationship": {
 							"sub_fields": {
-								"disunity": parseInt(this.state.disunity)
+								"disunity": parseInt(this.state.disunity, 10)
 							}
 						},
 						"special_achivement": {
 							"sub_fields": {
-								"important_position": parseInt(this.state.importantPosition),
-								"high_competion_result": parseInt(this.state.highCompetitionResult)
+								"important_position": parseInt(this.state.importantPosition, 10),
+								"high_competion_result": parseInt(this.state.highCompetitionResult, 10)
 							}
 						}
 					}
@@ -178,37 +244,37 @@ export default class EvaluationForm extends Component {
 					"target_assignment": {
 						"study_result": {
 							"sub_fields": {
-								"poor_result": parseInt(this.state.poorResult),
-								"warning": parseInt(this.state.warning),
-								"not_enough_credits": parseInt(this.state.notEnoughCredits),
-								"exam_skip": parseInt(this.state.examSkip)
+								"poor_result": parseInt(this.state.poorResult, 10),
+								"warning": parseInt(this.state.warning, 10),
+								"not_enough_credits": parseInt(this.state.notEnoughCredits, 10),
+								"exam_skip": parseInt(this.state.examSkip, 10)
 							}
 						},
 						"regulations": {
 							"sub_fields": {
-								"wrong_payment": parseInt(this.state.wrongPayment),
-								"late_course_registration": parseInt(this.state.lateCourseRegistration),
-								"absence": parseInt(this.state.absence),
-								"late_return": parseInt(this.state.lateReturn),
-								"local_regulations": parseInt(this.state.localRegulations)
+								"wrong_payment": parseInt(this.state.wrongPayment, 10),
+								"late_course_registration": parseInt(this.state.lateCourseRegistration, 10),
+								"absence": parseInt(this.state.absence, 10),
+								"late_return": parseInt(this.state.lateReturn, 10),
+								"local_regulations": parseInt(this.state.localRegulations, 10)
 							}
 						},
 						"activities": {
 							"sub_fields": {
-								"full_participation": parseInt(this.state.fullParticipation),
-								"addition_activities": parseInt(this.state.additionActivities),
-								"activities_absence": parseInt(this.state.activitiesAbsence),
+								"full_participation": parseInt(this.state.fullParticipation, 10),
+								"addition_activities": parseInt(this.state.additionActivities, 10),
+								"activities_absence": parseInt(this.state.activitiesAbsence, 10),
 							}
 						},
 						"public_relationship": {
 							"sub_fields": {
-								"disunity": parseInt(this.state.disunity)
+								"disunity": parseInt(this.state.disunity, 10)
 							}
 						},
 						"special_achivement": {
 							"sub_fields": {
-								"important_position": parseInt(this.state.importantPosition),
-								"high_competion_result": parseInt(this.state.highCompetitionResult)
+								"important_position": parseInt(this.state.importantPosition, 10),
+								"high_competion_result": parseInt(this.state.highCompetitionResult, 10)
 							}
 						}
 					}
@@ -314,6 +380,8 @@ export default class EvaluationForm extends Component {
 					classification: res.data.evaluation_form.classification,
 					selfAssessment: res.data.evaluation_form.self_assessment,
 					semesterTitle: res.data.semester.title,
+					comments: res.data.comments,
+					status: res.data.evaluation_form.status,
 					poorResultScore: res.data.evaluation_form.target_assignment.study_result.sub_fields.poor_result.score,
 					warningScore: res.data.evaluation_form.target_assignment.study_result.sub_fields.warning.score,
 					notEnoughCreditsScore: res.data.evaluation_form.target_assignment.study_result.sub_fields.not_enough_credits.score,
@@ -371,6 +439,7 @@ export default class EvaluationForm extends Component {
 								type="number"
 								min={0}
 								max={1}
+								onBlur={this.handleBlur}
 								value={this.state.poorResult}
 								onChange={this.onChange}
 								name="poorResult"
@@ -391,6 +460,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.warning}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="warning"
 								disabled={!this.state.editable}
 							/>
@@ -409,6 +479,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.notEnoughCredits}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="notEnoughCredits"
 								disabled={!this.state.editable}
 							/>
@@ -427,6 +498,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.examSkip}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="examSkip"
 								disabled={!this.state.editable}
 							/>
@@ -460,6 +532,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.wrongPayment}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="wrongPayment"
 								disabled={!this.state.editable}
 							/>
@@ -478,6 +551,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.lateCourseRegistration}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="lateCourseRegistration"
 								disabled={!this.state.editable}
 							/>
@@ -493,6 +567,7 @@ export default class EvaluationForm extends Component {
 							<FormControl
 								type="number"
 								min={0}
+								onBlur={this.handleBlur}
 								value={this.state.absence}
 								onChange={this.onChange}
 								name="absence"
@@ -513,6 +588,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.lateReturn}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="lateReturn"
 								disabled={!this.state.editable}
 							/>
@@ -531,6 +607,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.localRegulations}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="localRegulations"
 								disabled={!this.state.editable}
 							/>
@@ -564,6 +641,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.fullParticipation}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="fullParticipation"
 								disabled={!this.state.editable}
 							/>
@@ -581,6 +659,7 @@ export default class EvaluationForm extends Component {
 								min={0}
 								value={this.state.additionActivities}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="additionActivities"
 								disabled={!this.state.editable}
 							/>
@@ -598,6 +677,7 @@ export default class EvaluationForm extends Component {
 								min={0}
 								value={this.state.activitiesAbsence}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="activitiesAbsence"
 								disabled={!this.state.editable}
 							/>
@@ -631,6 +711,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.disunity}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="disunity"
 								disabled={!this.state.editable}
 							/>
@@ -664,6 +745,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.importantPosition}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="importantPosition"
 								disabled={!this.state.editable}
 							/>
@@ -682,6 +764,7 @@ export default class EvaluationForm extends Component {
 								max={1}
 								value={this.state.highCompetitionResult}
 								onChange={this.onChange}
+								onBlur={this.handleBlur}
 								name="highCompetitionResult"
 								disabled={!this.state.editable}
 							/>
@@ -698,8 +781,8 @@ export default class EvaluationForm extends Component {
 				{/* Comment part */}
 				<h3>Bình luận</h3>
 				<hr />
-				<Comment user="kien" content="hello" />
-				<textarea placeholder="Viết bình luận..." className="form-control" rows="3" onChange={this.onCommentChange}></textarea>
+				{this.state.comments.map((comment) => <Comment key={comment.id} user={comment.username} content={comment.content} createdAt={comment.created_at}/>)}
+				<textarea placeholder="Viết bình luận..." className="form-control" rows="3" onChange={this.onCommentChange} value={this.state.newComment}></textarea>
 				<ButtonToolbar>
 					<Button bsStyle="primary" onClick={this.postComment}>Bình luận</Button>
 				</ButtonToolbar>

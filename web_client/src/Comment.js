@@ -11,7 +11,7 @@ export default class Comment extends Component {
 			<div>
 				<Panel>
 					<Panel.Heading>
-						<Panel.Title componentClass="h3"><strong>{this.props.user}</strong> commented at</Panel.Title>
+						<Panel.Title componentClass="h3"><strong>{this.props.user}</strong> commented at {(new Date(this.props.createdAt)).toLocaleDateString()}</Panel.Title>
 					</Panel.Heading>
 					<Panel.Body>{this.props.content}</Panel.Body>
 				</Panel>

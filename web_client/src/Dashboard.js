@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './Navigation';
-import { PageHeader, Row, Col, Nav, NavItem, Table } from 'react-bootstrap';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { Row, Col, Nav, NavItem } from 'react-bootstrap';
 import './Dashboard.css';
 import PointList from './PointList';
 import Feedback from './Feedback';
