@@ -60,6 +60,12 @@ namespace :sample_data do
           student_id: student.id
         )
       end
+
+      EvaluationForm.create(
+        target_assignment: EvaluationForm.generate_form,
+        semester_id: semester.id,
+        student_id: class_president.id
+      )
     end
   end
 end
