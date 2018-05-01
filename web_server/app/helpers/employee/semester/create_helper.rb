@@ -18,6 +18,14 @@ module Employee::Semester::CreateHelper
           student_id: student.id
         )
       end
+
+      ::ClassPresident.all.each do |class_president|
+        worker.add(
+          target_assignment: ::EvaluationForm.generate_form,
+          semester_id: @new_semester.id,
+          student_id: class_president.id
+        )
+      end
     end
   end
 
