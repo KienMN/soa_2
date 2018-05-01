@@ -6,13 +6,13 @@ module Adviser::Comment::CreateHelper
   end
 
   def create_comment
-    @evaluation_form = ::EvaluationForm.eager_load(student: [:organizations])
+    @evaluation_form = ::EvaluationForm.eager_load(user: [:organizations])
       .find_by("evaluation_forms.id = #{@params[:evaluation_form_id]} and
                 evaluation_forms.status = #{::EvaluationForm.statuses[:avaiable]} and
                 organizations.type_organization = #{Organization.type_organizations[:class]}")
 
     organization_users = ::OrganizationUser.find_by(
-      organization_id: @evaluation_form.student.organizations.map{|x| x.id},
+      organization_id: @evaluation_form.user.organizations.map{|x| x.id},
       user_id: @current_user.id
     )
 
