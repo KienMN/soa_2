@@ -27,7 +27,7 @@ module Adviser::Comment::CreateHelper
     @status = {
       :code    => Settings.code.success,
       :message => "",
-      :data    => @new_comment,
+      :data    => @new_comment.attributes.merge!(username: @new_comment.user.username),
     }
   end
 

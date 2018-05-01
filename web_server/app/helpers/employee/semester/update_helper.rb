@@ -12,8 +12,10 @@ module Employee::Semester::UpdateHelper
 
     @semester.update_attributes(semester_params)
 
-    if @semester.status.closed?
+    if @semester.closed?
       @semester.evaluation_forms.update_all(status: ::EvaluationForm.statuses[:closed])
+    elsif @semester.avaiable?
+      @semester.evaluation_forms.update_all(status: ::EvaluationForm.statuses[:avaiable])
     end
   end
 
