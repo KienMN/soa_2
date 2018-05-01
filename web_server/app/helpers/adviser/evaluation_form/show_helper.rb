@@ -14,7 +14,7 @@ module Adviser::EvaluationForm::ShowHelper
       .pluck(:organization_id)
 
     @evaluation_form = ::EvaluationForm.eager_load(:semester, comments: [:user])
-      .joins(student: [:organization_users])
+      .joins(user: [:organization_users])
       .find_by("organization_users.organization_id in (#{@organizations.join(',')})
         and evaluation_forms.id = #{@params[:id]}")
 

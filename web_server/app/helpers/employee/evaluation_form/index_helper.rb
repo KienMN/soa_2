@@ -8,7 +8,7 @@ module Employee::EvaluationForm::IndexHelper
   private
 
   def get_evaluation_forms
-    @evaluation_forms = ::EvaluationForm.eager_load(:student).all
+    @evaluation_forms = ::EvaluationForm.eager_load(:user).all
     .paginate(
       page: @params[:page], per_page: Settings.per_page
     )
@@ -17,7 +17,7 @@ module Employee::EvaluationForm::IndexHelper
 
     @evaluation_forms.each do |e|
       tmp = e.attributes
-      tmp.merge!("username" => e.student.username)
+      tmp.merge!("username" => e.user.username)
 
       @result << tmp
     end
