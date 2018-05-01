@@ -272,6 +272,9 @@ class EvaluationForm < ApplicationRecord
       self.self_assessment = total_score
     when :class_president_assessment
       self.class_president_assessment = total_score
+    when :class_president_assessment_and_self_assessment
+      self.self_assessment = total_score
+      self.class_president_assessment = total_score
     end
 
     self.target_assignment = filled_form
