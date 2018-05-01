@@ -2,6 +2,7 @@ class EvaluationForm < ApplicationRecord
   has_many :comments, dependent: :destroy
   belongs_to :semester
   belongs_to :student, class_name: "Student", foreign_key: "student_id"
+  belongs_to :user, foreign_key: "student_id"
 
   enum status: [:avaiable, :complete, :closed, :out_of_date]
   enum classification: [:weak, :medium, :middling, :good, :excellent]
