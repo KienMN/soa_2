@@ -21,7 +21,7 @@ module Adviser::EvaluationForm::ShowHelper
     @comments = []
     @evaluation_form.comments.each do |c|
       tmp = c.attributes
-      tmp.merge("username" => c.user.username)
+      tmp.merge!("username" => c.user.username)
       @comments << tmp
     end
   end
