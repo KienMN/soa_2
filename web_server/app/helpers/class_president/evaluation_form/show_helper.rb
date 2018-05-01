@@ -13,7 +13,7 @@ module ClassPresident::EvaluationForm::ShowHelper
       .where("organizations.type_organization = #{::Organization.type_organizations[:class]}")
       .pluck(:organization_id)
 
-    @evaluation_form = ::EvaluationForm.eager_load(comments: [:user], :semester)
+    @evaluation_form = ::EvaluationForm.eager_load(:semester, comments: [:user])
       .joins(student: [:organization_users])
       .find_by("organization_users.organization_id in (#{@organizations.join(',')})
         and evaluation_forms.id = #{@params[:id]}")
