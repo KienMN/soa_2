@@ -8,7 +8,7 @@ module Employee::Semester::UpdateHelper
   private
 
   def update_semester
-    @semester = ::Semester.find_by(@params[:id])
+    @semester = ::Semester.find_by(id: i@params[:id])
 
     @semester.update_attributes(semester_params)
 
