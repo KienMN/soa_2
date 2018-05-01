@@ -8,7 +8,7 @@ module Student::EvaluationForm::ShowHelper
   private
 
   def get_evaluation_form
-    @evaluation_form = ::EvaluationForm.eager_load(comments: [:user], :semester)
+    @evaluation_form = ::EvaluationForm.eager_load(:semester, comments: [:user])
     .find_by(
       id: @params[:id],
       student_id: @current_user.id
