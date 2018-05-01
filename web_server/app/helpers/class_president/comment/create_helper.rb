@@ -12,7 +12,7 @@ module ClassPresident::Comment::CreateHelper
                 organizations.type_organization = #{Organization.type_organizations[:class]}")
 
     organization_users = ::OrganizationUser.find_by(
-      id: @evaluation_form.student.organizations.map{|x| x.id},
+      organization_id: @evaluation_form.student.organizations.map{|x| x.id},
       user_id: @current_user.id
     )
 

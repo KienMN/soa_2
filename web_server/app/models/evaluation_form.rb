@@ -1,5 +1,5 @@
 class EvaluationForm < ApplicationRecord
-  has_many :comments
+  has_many :comments, dependent: :destroy
   belongs_to :semester
   belongs_to :student, class_name: "Student", foreign_key: "student_id"
 
@@ -315,7 +315,7 @@ class EvaluationForm < ApplicationRecord
           }
         },
         special_achivement: {
-          score: 10,
+          score: 0,
           sub_fields: {
             important_position:    {score: 0},
             high_competion_result: {score: 0},
