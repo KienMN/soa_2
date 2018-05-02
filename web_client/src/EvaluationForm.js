@@ -386,17 +386,17 @@ export default class EvaluationForm extends Component {
 					warning: res.data.evaluation_form.target_assignment.study_result.sub_fields.warning.score/5,
 					notEnoughCredits: res.data.evaluation_form.target_assignment.study_result.sub_fields.not_enough_credits.score/5,
 					examSkip: res.data.evaluation_form.target_assignment.study_result.sub_fields.exam_skip.score/2,
-					wrongPaymentScore: res.data.evaluation_form.target_assignment.regulations.sub_fields.wrong_payment.score,
-					lateCourseRegistrationScore: res.data.evaluation_form.target_assignment.regulations.sub_fields.late_course_registration.score,
-					absenceScore: res.data.evaluation_form.target_assignment.regulations.sub_fields.absence.score,
-					lateReturnScore: res.data.evaluation_form.target_assignment.regulations.sub_fields.late_return.score,
-					localRegulationsScore: res.data.evaluation_form.target_assignment.regulations.sub_fields.local_regulations.score,
-					fullParticipationScore: res.data.evaluation_form.target_assignment.activities.sub_fields.full_participation.score,
-					additionActivitiesScore: res.data.evaluation_form.target_assignment.activities.sub_fields.addition_activities.score,
-					activitiesAbsenceScore: res.data.evaluation_form.target_assignment.activities.sub_fields.activities_absence.score,
-					disunityScore: res.data.evaluation_form.target_assignment.public_relationship.sub_fields.disunity.score,
-					importantPositionScore: res.data.evaluation_form.target_assignment.special_achivement.sub_fields.important_position.score,
-					highCompetitionResultScore: res.data.evaluation_form.target_assignment.special_achivement.sub_fields.high_competion_result.score
+					wrongPayment: res.data.evaluation_form.target_assignment.regulations.sub_fields.wrong_payment.score/5,
+					lateCourseRegistration: res.data.evaluation_form.target_assignment.regulations.sub_fields.late_course_registration.score/2,
+					absence: res.data.evaluation_form.target_assignment.regulations.sub_fields.absence.score/5,
+					lateReturn: res.data.evaluation_form.target_assignment.regulations.sub_fields.late_return.score/5,
+					localRegulations: res.data.evaluation_form.target_assignment.regulations.sub_fields.local_regulations.score/10,
+					fullParticipation: res.data.evaluation_form.target_assignment.activities.sub_fields.full_participation.score/10,
+					additionActivities: res.data.evaluation_form.target_assignment.activities.sub_fields.addition_activities.score/2,
+					activitiesAbsence: res.data.evaluation_form.target_assignment.activities.sub_fields.activities_absence.score/5,
+					disunity: res.data.evaluation_form.target_assignment.public_relationship.sub_fields.disunity.score/5,
+					importantPosition: res.data.evaluation_form.target_assignment.special_achivement.sub_fields.important_position.score/10,
+					highCompetitionResult: res.data.evaluation_form.target_assignment.special_achivement.sub_fields.high_competion_result.score/5
 				})
 			})
 	}
@@ -681,7 +681,7 @@ export default class EvaluationForm extends Component {
 								name="activitiesAbsence"
 								disabled={!this.state.editable}
 							/>
-							<HelpBlock>Trừ 2 điểm/lần</HelpBlock>
+							<HelpBlock>Trừ 5 điểm/lần</HelpBlock>
 						</Col>
 					</FormGroup>
 
