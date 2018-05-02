@@ -10,25 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180321015210) do
+ActiveRecord::Schema.define(version: 20180417082452) do
 
-  create_table "book_borrows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "book_id"
-    t.bigint "user_id"
+  create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "content", null: false
+    t.bigint "user_id", null: false
+    t.bigint "evaluation_form_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_book_borrows_on_book_id"
-    t.index ["user_id"], name: "index_book_borrows_on_user_id"
+    t.index ["evaluation_form_id"], name: "index_comments_on_evaluation_form_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "author"
-    t.string "country"
-    t.string "language"
-    t.string "pages"
+  create_table "evaluation_forms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.json "target_assignment"
+    t.integer "status", default: 0
+    t.integer "confirmation", default: 1
+    t.integer "self_assessment", default: 0
+    t.integer "class_president_assessment", default: 0
+    t.integer "classification", default: 0
+    t.bigint "semester_id"
+    t.bigint "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["semester_id"], name: "index_evaluation_forms_on_semester_id"
+    t.index ["student_id"], name: "index_evaluation_forms_on_student_id"
+  end
+
+  create_table "organization_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "organization_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_organization_users_on_organization_id"
+    t.index ["user_id"], name: "index_organization_users_on_user_id"
+  end
+
+  create_table "organizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title", null: false
-    t.datetime "publish_date"
-    t.integer "quantity_in_stock", default: 0
+    t.integer "type_organization"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "semesters", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "title"
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,10 +64,15 @@ ActiveRecord::Schema.define(version: 20180321015210) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "type"
     t.string "username"
+    t.string "password"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "book_borrows", "books"
-  add_foreign_key "book_borrows", "users"
+  add_foreign_key "comments", "evaluation_forms"
+  add_foreign_key "comments", "users"
+  add_foreign_key "evaluation_forms", "semesters"
+  add_foreign_key "evaluation_forms", "users", column: "student_id"
+  add_foreign_key "organization_users", "organizations"
+  add_foreign_key "organization_users", "users"
 end
