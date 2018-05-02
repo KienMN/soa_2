@@ -13,9 +13,17 @@ module Employee::Semester::UpdateHelper
     @semester.update_attributes(semester_params)
 
     if @semester.closed?
-      @semester.evaluation_forms.update_all(status: ::EvaluationForm.statuses[:closed])
+      @semester.evaluation_forms.where(status: ::EvaluationForm.statuses[:complete])
+      	.update_all(status: ::EvaluationForm.statuses[:closed])
+
+      @semester.evaluation_forms.where(status: ::EvaluationForm.statuses[:avaiable])
+      	.update_all(status: ::EvaluationForm.statuses[:out_of_date])
     elsif @semester.avaiable?
-      @semester.evaluation_forms.update_all(status: ::EvaluationForm.statuses[:avaiable])
+    	@semester.evaluation_forms.where(status: ::EvaluationForm.statuses[:closed])
+      	.update_all(status: ::EvaluationForm.statuses[:complete])
+
+      @semester.evaluation_forms.where(status: ::EvaluationForm.statuses[:out_of_date])
+      	.update_all(status: ::EvaluationForm.statuses[:avaiable])
     end
   end
 

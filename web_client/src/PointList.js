@@ -69,7 +69,9 @@ export default class PointList extends Component {
 				for (let i = 0; i < numberOfForms; i++) {
 					if (res.data.evaluation_forms[i].status === "closed") {
 						res.data.evaluation_forms[i].status = "Đã đóng"
-					} else if (res.data.evaluation_forms[i].confirmation % 5 === 0) {
+					} else if (res.data.evaluation_forms[i].status === "out_of_date") {
+						res.data.evaluation_forms[i].status = "Đã hết hạn"
+					} else if (res.data.evaluation_forms[i].status === "complete") {
 						res.data.evaluation_forms[i].status = "Đã phê duyệt"
 					} else if (res.data.evaluation_forms[i].confirmation % 3 === 0) {
 						res.data.evaluation_forms[i].status = "Đã phê duyệt bởi cố vấn"
@@ -117,7 +119,9 @@ export default class PointList extends Component {
 				for (let i = 0; i < numberOfForms; i++) {
 					if (res.data.evaluation_forms[i].status === "closed") {
 						res.data.evaluation_forms[i].status = "Đã đóng"
-					} else if (res.data.evaluation_forms[i].confirmation % 5 === 0) {
+					} else if (res.data.evaluation_forms[i].status === "out_of_date") {
+						res.data.evaluation_forms[i].status = "Đã hết hạn"
+					} else if (res.data.evaluation_forms[i].status === "complete") {
 						res.data.evaluation_forms[i].status = "Đã phê duyệt"
 					} else if (res.data.evaluation_forms[i].confirmation % 3 === 0) {
 						res.data.evaluation_forms[i].status = "Đã phê duyệt bởi cố vấn"
