@@ -51,21 +51,21 @@ export default class EvaluationForm extends Component {
 			disunity: 0,
 			importantPosition: 0,
 			highCompetitionResult: 0,
-			poorResultScore: 0,
-			warningScore: 0,
-			notEnoughCreditsScore: 0,
-			examSkipScore: 0,
-			wrongPaymentScore: 0,
-			lateCourseRegistrationScore: 0,
-			absenceScore: 0,
-			lateReturnScore: 0,
-			localRegulationsScore: 0,
-			fullParticipationScore: 0,
-			additionActivitiesScore: 0,
-			activitiesAbsenceScore: 0,
-			disunityScore: 0,
-			importantPositionScore: 0,
-			highCompetitionResultScore: 0
+			// poorResultScore: 0,
+			// warningScore: 0,
+			// notEnoughCreditsScore: 0,
+			// examSkipScore: 0,
+			// wrongPaymentScore: 0,
+			// lateCourseRegistrationScore: 0,
+			// absenceScore: 0,
+			// lateReturnScore: 0,
+			// localRegulationsScore: 0,
+			// fullParticipationScore: 0,
+			// additionActivitiesScore: 0,
+			// activitiesAbsenceScore: 0,
+			// disunityScore: 0,
+			// importantPositionScore: 0,
+			// highCompetitionResultScore: 0
 		}
 
 		this.changeEditable = this.changeEditable.bind(this);
@@ -415,17 +415,17 @@ export default class EvaluationForm extends Component {
 				{/* Evaluation form part */}
 				<Form horizontal>
 					<FormGroup>
-						<Col sm={4} smOffset={1}>
-							<ControlLabel>Kết quả học tập</ControlLabel>
+						<Col sm={5} smOffset={1}>
+							<ControlLabel>Kết quả học tập: {this.state.studyResult}</ControlLabel>
 						</Col>
-						<Col sm={5}>
-							<FormControl
+						<Col sm={4}>
+							{/* <FormControl
 								type="number"
 								name="studyResult"
 								value={this.state.studyResult}
 								onChange={this.onChange}
 								disabled={true}
-							/>
+							/> */}
 							<HelpBlock>Tối đa 30 điểm</HelpBlock>
 						</Col>
 					</FormGroup>
@@ -507,16 +507,16 @@ export default class EvaluationForm extends Component {
 					</FormGroup>
 
 					<FormGroup>
-						<Col sm={4} smOffset={1}>
-							<ControlLabel>Chấp hành quy định</ControlLabel>
+						<Col sm={5} smOffset={1}>
+							<ControlLabel>Chấp hành quy định: {this.state.regulations}</ControlLabel>
 						</Col>
-						<Col sm={5}>
-							<FormControl
+						<Col sm={4}>
+							{/* <FormControl
 								type="number"
 								name="regulations"
 								value={this.state.regulations}
 								disabled={true}
-							/>
+							/> */}
 							<HelpBlock>Tối đa 25 điểm</HelpBlock>
 						</Col>
 					</FormGroup>
@@ -616,16 +616,16 @@ export default class EvaluationForm extends Component {
 					</FormGroup>
 
 					<FormGroup>
-						<Col sm={4} smOffset={1}>
-							<ControlLabel>Các hoạt động ngoại khoá</ControlLabel>
+						<Col sm={5} smOffset={1}>
+							<ControlLabel>Các hoạt động ngoại khoá: {this.state.activities}</ControlLabel>
 						</Col>
-						<Col sm={5}>
-							<FormControl
+						<Col sm={4}>
+							{/* <FormControl
 								type="number"
 								name="activities"
 								value={this.state.activities}
 								disabled={true}
-							/>
+							/> */}
 							<HelpBlock>Tối đa 20 điểm</HelpBlock>
 						</Col>
 					</FormGroup>
@@ -686,16 +686,16 @@ export default class EvaluationForm extends Component {
 					</FormGroup>
 
 					<FormGroup>
-						<Col sm={4} smOffset={1}>
-							<ControlLabel>Quan hệ cộng đồng</ControlLabel>
+						<Col sm={5} smOffset={1}>
+							<ControlLabel>Quan hệ cộng đồng: {this.state.publicRelationship}</ControlLabel>
 						</Col>
-						<Col sm={5}>
-							<FormControl
+						<Col sm={4}>
+							{/* <FormControl
 								type="number"
 								name="publicRelationship"
 								value={this.state.publicRelationship}
 								disabled={true}
-							/>
+							/> */}
 							<HelpBlock>Tối đa 15 điểm</HelpBlock>
 						</Col>
 					</FormGroup>
@@ -720,16 +720,16 @@ export default class EvaluationForm extends Component {
 					</FormGroup>
 
 					<FormGroup>
-						<Col sm={4} smOffset={1}>
-							<ControlLabel>Thành tích đặc biệt</ControlLabel>
+						<Col sm={5} smOffset={1}>
+							<ControlLabel>Thành tích đặc biệt: {this.state.specialAchievement}</ControlLabel>
 						</Col>
-						<Col sm={5}>
-							<FormControl
+						<Col sm={4}>
+							{/* <FormControl
 								type="number"
 								name="specialAchievement"
 								value={this.state.specialAchievement}
 								disabled={true}
-							/>
+							/> */}
 							<HelpBlock>Tối đa 10 điểm</HelpBlock>
 						</Col>
 					</FormGroup>

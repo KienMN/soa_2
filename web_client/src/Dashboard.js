@@ -38,8 +38,8 @@ class Dashboard extends Component {
 			switch (activeKey) {
 				case 0:
 					return <PointList />
-				case 1:
-					return <Feedback />
+				// case 1:
+				// 	return <Feedback />
 				case 2:
 					return <Semester />
 			}
@@ -54,9 +54,9 @@ class Dashboard extends Component {
 								<NavItem eventKey={0}>
 									Điểm rèn luyện
 								</NavItem>
-								<NavItem eventKey={1}>
+								{/* <NavItem eventKey={1}>
 									Phản hồi
-								</NavItem>
+								</NavItem> */}
 								{(type === "Employee") ? <NavItem eventKey={2}>Học kỳ</NavItem> : <NavItem disabled />}
 							</Nav>
 						</Col>
